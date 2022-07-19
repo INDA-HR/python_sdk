@@ -1,0 +1,18 @@
+# Project
+
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**project_name** | [**BaseModelsName**](BaseModelsName.md) |  | [optional] 
+**description** | [**Description**](Description.md) |  | [optional] 
+**roles** | [**[Role]**](Role.md) | Roles played in the project. | [optional] 
+**keywords** | [**[Keyword]**](Keyword.md) | Keywords describing the project. | [optional] 
+**start_date** | [**Date**](Date.md) |  | [optional] 
+**end_date** | [**Date**](Date.md) |  | [optional] 
+**ongoing** | [**Ongoing**](Ongoing.md) |  | [optional] 
+**link** | [**ResumeLinkLink**](ResumeLinkLink.md) |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

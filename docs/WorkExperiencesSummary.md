@@ -1,0 +1,15 @@
+# WorkExperiencesSummary
+
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**work_experiences_count** | [**ValidatedIntegerValueModel**](ValidatedIntegerValueModel.md) |  | [optional] 
+**work_experiences_average_duration** | [**ValidatedIntegerValueModel**](ValidatedIntegerValueModel.md) |  | [optional] 
+**work_experiences_total_duration** | [**ValidatedIntegerValueModel**](ValidatedIntegerValueModel.md) |  | [optional] 
+**highest_seniority_level_code** | [**SeniorityLevelCode**](SeniorityLevelCode.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

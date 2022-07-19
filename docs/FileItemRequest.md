@@ -1,0 +1,13 @@
+# FileItemRequest
+
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**attachments** | [**ResumeRequestsAttachments**](ResumeRequestsAttachments.md) |  | 
+**data** | [**ResumeCommonData**](ResumeCommonData.md) |  | [optional] 
+**metadata** | [**ResumeRequestsMetadata**](ResumeRequestsMetadata.md) |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
