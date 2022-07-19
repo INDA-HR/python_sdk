@@ -1,4 +1,4 @@
-# inda-hr
+# INDA HR
 
 # Introduction
 
