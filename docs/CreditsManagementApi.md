@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Search Credits
 
- Returns the available credits and the history of the API calls already made for the purchased services belonging to *indexname*.  This method will accept an application/json body with optional fields, which allow users to filter or aggregate data according to their needs.  In principle, API call names are the ones shown in this documentation; refer to each method section for additional  details and/or possible changes.  
+Returns the available credits and the history of the API calls already made for the purchased services belonging to *indexname*.  This method will accept an application/json body with optional fields, which allow users to filter or aggregate data according to their needs.  In principle, API call names are the ones shown in this documentation; refer to each method section for additional  details and/or possible changes.
 
 ### Example
 

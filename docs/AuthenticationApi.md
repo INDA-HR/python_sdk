@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Log In
 
- This method allows a user to log into the service and receive access credentials in the form of a bearer token. The token expires after  *ExpiresIn* seconds, as detailed in the response.  
+This method allows a user to log into the service and receive access credentials in the form of a bearer token. The token expires after  *ExpiresIn* seconds, as detailed in the response.
 
 ### Example
 

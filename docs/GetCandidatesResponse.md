@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**job_ad_id** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | 
+**job_ad_id** | [**Jobadid**](Jobadid.md) |  | 
 **resumes** | **[str]** |  | 
 **total** | **int** | Total number of elements in a certain index. | [optional]  if omitted the server will use the default value of 0
 **hits** | **int** | Number of elements in a search query. | [optional]  if omitted the server will use the default value of 0

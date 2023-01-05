@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resume_id** | **str** |  | 
-**job_ad_id** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | 
+**job_ad_id** | [**Jobadid**](Jobadid.md) |  | 
 **analysis_status** | **str** |  | 
 **deleted** | **bool** |  | 
 

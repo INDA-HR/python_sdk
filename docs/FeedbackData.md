@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**job_title** | [**ResumeJobTitle**](ResumeJobTitle.md) |  | [optional] 
+**job_title** | [**OptionalResumeJobTitle**](OptionalResumeJobTitle.md) |  | [optional] 
 **personal_info** | [**PersonalInfo**](PersonalInfo.md) |  | [optional] 
 **contact_info** | [**ResumeContactInfoContactInfo**](ResumeContactInfoContactInfo.md) |  | [optional] 
 **person_location** | [**PersonLocation**](PersonLocation.md) |  | [optional] 
@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **cover_letter** | [**Text**](Text.md) |  | [optional] 
 **references** | [**[Reference]**](Reference.md) | Candidate&#39;s references. | [optional] 
 **profile_summary** | [**ProfileSummary**](ProfileSummary.md) |  | [optional] 
-**skills** | [**[ResumeSkill]**](ResumeSkill.md) | Candidate&#39;s skills. | [optional] 
-**job_titles** | [**[ResumeJobTitle]**](ResumeJobTitle.md) | Candidate&#39;s job titles. | [optional] 
+**skills** | [**[OptionalResumeSkill]**](OptionalResumeSkill.md) | Candidate&#39;s skills. | [optional] 
+**job_titles** | [**[OptionalResumeJobTitle]**](OptionalResumeJobTitle.md) | Candidate&#39;s job titles. | [optional] 
 **languages** | [**[FeedbackLanguage]**](FeedbackLanguage.md) |  | [optional] 
 **certifications** | [**[Certification]**](Certification.md) | Certifications earned by the candidate. | [optional] 
 **publications** | [**[Publication]**](Publication.md) | Candidate&#39;s publications, both academic papers and books. | [optional] 

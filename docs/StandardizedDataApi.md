@@ -70,7 +70,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -79,7 +79,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Company Size
-        api_response = api_instance.get_company_size_get(lang=lang, codes=codes)
+        api_response = api_instance.get_company_size_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_company_size_get: %s\n" % e)
@@ -90,7 +90,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -157,7 +157,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -166,7 +166,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Company Type
-        api_response = api_instance.get_company_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_company_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_company_type_get: %s\n" % e)
@@ -177,7 +177,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -244,7 +244,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -253,7 +253,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Contract Type
-        api_response = api_instance.get_contract_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_contract_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_contract_type_get: %s\n" % e)
@@ -264,7 +264,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -331,7 +331,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -340,7 +340,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Disability
-        api_response = api_instance.get_disability_get(lang=lang, codes=codes)
+        api_response = api_instance.get_disability_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_disability_get: %s\n" % e)
@@ -351,7 +351,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -418,7 +418,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -427,7 +427,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Education Title
-        api_response = api_instance.get_education_title_get(lang=lang, codes=codes)
+        api_response = api_instance.get_education_title_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_education_title_get: %s\n" % e)
@@ -438,7 +438,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -505,7 +505,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -514,7 +514,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Email Label
-        api_response = api_instance.get_email_label_get(lang=lang, codes=codes)
+        api_response = api_instance.get_email_label_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_email_label_get: %s\n" % e)
@@ -525,7 +525,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -592,7 +592,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -601,7 +601,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Employment Type
-        api_response = api_instance.get_employment_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_employment_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_employment_type_get: %s\n" % e)
@@ -612,7 +612,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -679,7 +679,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -688,7 +688,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Field Of Study
-        api_response = api_instance.get_field_of_study_get(lang=lang, codes=codes)
+        api_response = api_instance.get_field_of_study_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_field_of_study_get: %s\n" % e)
@@ -699,7 +699,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -766,7 +766,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -775,7 +775,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Gender
-        api_response = api_instance.get_gender_get(lang=lang, codes=codes)
+        api_response = api_instance.get_gender_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_gender_get: %s\n" % e)
@@ -786,7 +786,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -853,7 +853,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -862,7 +862,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Industries
-        api_response = api_instance.get_industries_get(lang=lang, codes=codes)
+        api_response = api_instance.get_industries_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_industries_get: %s\n" % e)
@@ -873,7 +873,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -940,7 +940,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -949,7 +949,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Job Function
-        api_response = api_instance.get_job_function_get(lang=lang, codes=codes)
+        api_response = api_instance.get_job_function_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_job_function_get: %s\n" % e)
@@ -960,7 +960,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1027,7 +1027,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>it</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>it</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1036,7 +1036,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Jobshift Type
-        api_response = api_instance.get_jobshift_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_jobshift_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_jobshift_type_get: %s\n" % e)
@@ -1047,7 +1047,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1115,7 +1115,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
     license_type = "license_type_example" # str | 
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1132,7 +1132,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get License Code
-        api_response = api_instance.get_license_code_get(license_type, lang=lang, codes=codes)
+        api_response = api_instance.get_license_code_get(license_type, dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_license_code_get: %s\n" % e)
@@ -1144,7 +1144,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **license_type** | **str**|  |
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1211,7 +1211,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1220,7 +1220,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get License Type
-        api_response = api_instance.get_license_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_license_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_license_type_get: %s\n" % e)
@@ -1231,7 +1231,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1298,7 +1298,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1307,7 +1307,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Link Label
-        api_response = api_instance.get_link_label_get(lang=lang, codes=codes)
+        api_response = api_instance.get_link_label_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_link_label_get: %s\n" % e)
@@ -1318,7 +1318,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1385,7 +1385,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1394,7 +1394,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Marital Status
-        api_response = api_instance.get_marital_status_get(lang=lang, codes=codes)
+        api_response = api_instance.get_marital_status_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_marital_status_get: %s\n" % e)
@@ -1405,7 +1405,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1472,7 +1472,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1481,7 +1481,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Name Prefix
-        api_response = api_instance.get_name_prefix_get(lang=lang, codes=codes)
+        api_response = api_instance.get_name_prefix_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_name_prefix_get: %s\n" % e)
@@ -1492,7 +1492,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1559,7 +1559,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1568,7 +1568,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Name Suffix
-        api_response = api_instance.get_name_suffix_get(lang=lang, codes=codes)
+        api_response = api_instance.get_name_suffix_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_name_suffix_get: %s\n" % e)
@@ -1579,7 +1579,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1646,7 +1646,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1655,7 +1655,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Patent Status
-        api_response = api_instance.get_patent_status_get(lang=lang, codes=codes)
+        api_response = api_instance.get_patent_status_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_patent_status_get: %s\n" % e)
@@ -1666,7 +1666,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1733,7 +1733,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1742,7 +1742,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Phone Label
-        api_response = api_instance.get_phone_label_get(lang=lang, codes=codes)
+        api_response = api_instance.get_phone_label_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_phone_label_get: %s\n" % e)
@@ -1753,7 +1753,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1820,7 +1820,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1829,7 +1829,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Protected Group
-        api_response = api_instance.get_protected_group_get(lang=lang, codes=codes)
+        api_response = api_instance.get_protected_group_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_protected_group_get: %s\n" % e)
@@ -1840,7 +1840,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1907,7 +1907,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -1916,7 +1916,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Remote Working
-        api_response = api_instance.get_remote_working_get(lang=lang, codes=codes)
+        api_response = api_instance.get_remote_working_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_remote_working_get: %s\n" % e)
@@ -1927,7 +1927,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -1994,7 +1994,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -2003,7 +2003,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Salary Frequency
-        api_response = api_instance.get_salary_frequency_get(lang=lang, codes=codes)
+        api_response = api_instance.get_salary_frequency_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_salary_frequency_get: %s\n" % e)
@@ -2014,7 +2014,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -2081,7 +2081,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -2090,7 +2090,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Salary Type
-        api_response = api_instance.get_salary_type_get(lang=lang, codes=codes)
+        api_response = api_instance.get_salary_type_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_salary_type_get: %s\n" % e)
@@ -2101,7 +2101,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type
@@ -2168,7 +2168,7 @@ configuration = inda_hr.Configuration(
 with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = standardized_data_api.StandardizedDataApi(api_client)
-    lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | The language in which the 'Value' is returned. Supported languages: <code style='color: #333333; opacity: 0.9'>it</code>, <code style='color: #333333; opacity: 0.9'>en</code>, <code style='color: #333333; opacity: 0.9'>es</code>, <code style='color: #333333; opacity: 0.9'>pt</code>, <code style='color: #333333; opacity: 0.9'>de</code>, <code style='color: #333333; opacity: 0.9'>fr</code>, <code style='color: #333333; opacity: 0.9'>pl</code> (optional) if omitted the server will use the default value of "it"
     codes = [
         None,
     ] # [bool, date, datetime, dict, float, int, list, str, none_type] | If <code style='color: #333333; opacity: 0.9'>null</code> the API returns all the corresponding <code style='color: #333333; opacity: 0.9'>lang</code> data. (optional)
@@ -2177,7 +2177,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get Seniority Level
-        api_response = api_instance.get_seniority_level_get(lang=lang, codes=codes)
+        api_response = api_instance.get_seniority_level_get(dst_lang=dst_lang, codes=codes)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling StandardizedDataApi->get_seniority_level_get: %s\n" % e)
@@ -2188,7 +2188,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| The language in which the &#39;Value&#39; is returned. Supported languages: &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;it&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;en&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;es&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pt&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;de&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;fr&lt;/code&gt;, &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;pl&lt;/code&gt; | [optional] if omitted the server will use the default value of "it"
  **codes** | [**[bool, date, datetime, dict, float, int, list, str, none_type]**](bool, date, datetime, dict, float, int, list, str, none_type.md)| If &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;null&lt;/code&gt; the API returns all the corresponding &lt;code style&#x3D;&#39;color: #333333; opacity: 0.9&#39;&gt;lang&lt;/code&gt; data. | [optional]
 
 ### Return type

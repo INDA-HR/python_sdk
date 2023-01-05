@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**must** | [**[FilterField]**](FilterField.md) |  | [optional] 
 **should** | [**[FilterField]**](FilterField.md) |  | [optional] 
 **must_not** | [**[FilterField]**](FilterField.md) |  | [optional] 
 **filter** | [**[FilterField]**](FilterField.md) |  | [optional] 

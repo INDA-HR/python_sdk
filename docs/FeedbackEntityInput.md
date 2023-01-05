@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **allowed_outputs** | [**[AllowedOutput]**](AllowedOutput.md) |  | 
 **input_language** | **str** |  | [optional]  if omitted the server will use the default value of "it"
 **output_language** | **str** |  | [optional]  if omitted the server will use the default value of "it"
-**id** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**id** | [**Id**](Id.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

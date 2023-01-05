@@ -4,14 +4,14 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | [**BaseEmploymentsValueModelStrictStr**](BaseEmploymentsValueModelStrictStr.md) |  | 
+**name** | [**BaseLocationsValueModelStrictStr**](BaseLocationsValueModelStrictStr.md) |  | 
 **type** | [**CompanyCommonType**](CompanyCommonType.md) |  | [optional] 
 **size** | [**Size**](Size.md) |  | [optional] 
-**description** | [**BaseEmploymentsValueModelStrictStr**](BaseEmploymentsValueModelStrictStr.md) |  | [optional] 
+**description** | [**BaseLocationsValueModelStrictStr**](BaseLocationsValueModelStrictStr.md) |  | [optional] 
 **headquarters** | [**[Headquarter]**](Headquarter.md) | Company headquarters. | [optional] 
 **branches** | [**[Branch]**](Branch.md) | Company branches. | [optional] 
 **industries** | [**[CompanyCommonIndustry]**](CompanyCommonIndustry.md) | Company industries. Check the [Standardized Data](https://api.inda.ai/hr/docs/v2/#tag/Standardized-Data) section for more details. | [optional] 
-**specialties** | [**[BaseEmploymentsValueModelStrictStr]**](BaseEmploymentsValueModelStrictStr.md) | Keywords useful to provide additional detail about company industries. | [optional] 
+**specialties** | [**[BaseLocationsValueModelStrictStr]**](BaseLocationsValueModelStrictStr.md) | Keywords useful to provide additional detail about company industries. | [optional] 
 **founded** | [**FoundationYear**](FoundationYear.md) |  | [optional] 
 **logo** | [**JobadLinkLink**](JobadLinkLink.md) |  | [optional] 
 **link** | [**JobadLinkLink**](JobadLinkLink.md) |  | [optional] 

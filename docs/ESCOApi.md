@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ESCO Occupations Hierarchy
 
- This method provides the most similar ESCO job title given a *jobtitle* (that could be a word or a sentence in several languages), its hierarchy classification according with ISCO classification, and  the top three industries and job functions where the occupation is distributed.   More details about ESCO occupations hierarchy are showed [here](https://ec.europa.eu/esco/portal/occupation).  
+ This method provides the most similar ESCO job title given a *jobtitle* (that could be a word or a sentence in several languages), its hierarchy classification according with ISCO classification, and the top three industries and job functions where the occupation is distributed.  More details about ESCO occupations hierarchy are showed [here](https://ec.europa.eu/esco/portal/occupation).  
 
 ### Example
 
@@ -56,7 +56,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = esco_api.ESCOApi(api_client)
     query = "query_example" # str | It could be any word or sentence in several languages.
-    lang = "it" # str | The language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
 
     # example passing only required values which don't have defaults set
     try:
@@ -70,7 +70,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # ESCO Occupations Hierarchy
-        api_response = api_instance.esco_occupations_hierarchy_get(query, lang=lang)
+        api_response = api_instance.esco_occupations_hierarchy_get(query, dst_lang=dst_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->esco_occupations_hierarchy_get: %s\n" % e)
@@ -82,7 +82,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| It could be any word or sentence in several languages. |
- **lang** | **str**| The language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
 
 ### Return type
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 ESCO Skills Hierarchy
 
- This method provides the most similar ESCO skills given a *query* (representing a skill) that could be a word or a sentence in several languages; also its hierarchy classification according with ESCO is returned.   More details about ESCO skills hierarchy are showed [here](https://ec.europa.eu/esco/portal/skill).  
+ This method provides the most similar ESCO skills given a *query* (representing a skill) that could be a word or a sentence in several languages; also its hierarchy classification according with ESCO is returned.  More details about ESCO skills hierarchy are showed [here](https://ec.europa.eu/esco/portal/skill).  
 
 ### Example
 
@@ -149,7 +149,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = esco_api.ESCOApi(api_client)
     query = "query_example" # str | A word or a brief sentence in several languages.
-    lang = "it" # str | The language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
 
     # example passing only required values which don't have defaults set
     try:
@@ -163,7 +163,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # ESCO Skills Hierarchy
-        api_response = api_instance.esco_skills_hierarchy_get(query, lang=lang)
+        api_response = api_instance.esco_skills_hierarchy_get(query, dst_lang=dst_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->esco_skills_hierarchy_get: %s\n" % e)
@@ -175,7 +175,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| A word or a brief sentence in several languages. |
- **lang** | **str**| The language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
 
 ### Return type
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 From description to ESCO Occupations
 
- This method provides the list of n most affine ESCO occupations given a sentence or a long description.  For each returned occupation, the service provides also a list of the main related skills according to ESCO classification.  More details about ESCO occupations are showed [here](https://ec.europa.eu/esco/portal/occupation).  
+ This method provides the list of n most affine ESCO occupations given a sentence or a long description. For each returned occupation, the service provides also a list of the main related skills according to ESCO classification.  More details about ESCO occupations are showed [here](https://ec.europa.eu/esco/portal/occupation).  
 
 ### Example
 
@@ -245,7 +245,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     description_input = DescriptionInput(
         description="description_example",
     ) # DescriptionInput | 
-    lang = "it" # str | The language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
     size = 1 # int | The maximum number of similar ESCO occupations retrieved by the algorithm. (optional) if omitted the server will use the default value of 1
     min_score = 0.2 # float | Minimum score of the similar ESCO occupations with respect to the job title queried by the user. (optional) if omitted the server will use the default value of 0.2
 
@@ -261,7 +261,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # From description to ESCO Occupations
-        api_response = api_instance.from_description_to_esco_occupations_post(description_input, lang=lang, size=size, min_score=min_score)
+        api_response = api_instance.from_description_to_esco_occupations_post(description_input, dst_lang=dst_lang, size=size, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->from_description_to_esco_occupations_post: %s\n" % e)
@@ -273,7 +273,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **description_input** | [**DescriptionInput**](DescriptionInput.md)|  |
- **lang** | **str**| The language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
  **size** | **int**| The maximum number of similar ESCO occupations retrieved by the algorithm. | [optional] if omitted the server will use the default value of 1
  **min_score** | **float**| Minimum score of the similar ESCO occupations with respect to the job title queried by the user. | [optional] if omitted the server will use the default value of 0.2
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 From description to ESCO Skills
 
- This method provides the list of n most affine ESCO skills given a sentence or a long description. For each returned skill, the service provides also a list of the main occupations where the skill is mandatory  according to ESCO classification.  More details about ESCO skills are showed [here](https://ec.europa.eu/esco/portal/skill).  
+ This method provides the list of n most affine ESCO skills given a sentence or a long description. For each returned skill, the service provides also a list of the main occupations where the skill is mandatory according to ESCO classification.  More details about ESCO skills are showed [here](https://ec.europa.eu/esco/portal/skill).  
 
 ### Example
 
@@ -345,7 +345,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     description_input = DescriptionInput(
         description="description_example",
     ) # DescriptionInput | 
-    lang = "it" # str | The language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
     size = 1 # int | The maximum number of similar ESCO skills retrieved by the algorithm. (optional) if omitted the server will use the default value of 1
     min_score = 0.2 # float | Minimum score of the similar ESCO skills with respect to the skill queried by the user. (optional) if omitted the server will use the default value of 0.2
 
@@ -361,7 +361,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # From description to ESCO Skills
-        api_response = api_instance.from_description_to_esco_skills_post(description_input, lang=lang, size=size, min_score=min_score)
+        api_response = api_instance.from_description_to_esco_skills_post(description_input, dst_lang=dst_lang, size=size, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->from_description_to_esco_skills_post: %s\n" % e)
@@ -373,7 +373,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **description_input** | [**DescriptionInput**](DescriptionInput.md)|  |
- **lang** | **str**| The language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
  **size** | **int**| The maximum number of similar ESCO skills retrieved by the algorithm. | [optional] if omitted the server will use the default value of 1
  **min_score** | **float**| Minimum score of the similar ESCO skills with respect to the skill queried by the user. | [optional] if omitted the server will use the default value of 0.2
 
@@ -774,7 +774,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = esco_api.ESCOApi(api_client)
     query = "query_example" # str | A word or a brief sentence in several languages.
-    lang = "it" # str | The language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO occupations. (optional) if omitted the server will use the default value of "it"
     size = 1 # int | The maximum number of similar ESCO occupations retrieved by the algorithm. (optional) if omitted the server will use the default value of 1
     min_score = 0.2 # float | Minimum score of the similar ESCO occupations with respect to the job title queried by the user. (optional) if omitted the server will use the default value of 0.2
 
@@ -790,7 +790,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Similar ESCO Occupations
-        api_response = api_instance.similar_esco_occupations_get(query, lang=lang, size=size, min_score=min_score)
+        api_response = api_instance.similar_esco_occupations_get(query, dst_lang=dst_lang, size=size, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->similar_esco_occupations_get: %s\n" % e)
@@ -802,7 +802,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| A word or a brief sentence in several languages. |
- **lang** | **str**| The language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO occupations. | [optional] if omitted the server will use the default value of "it"
  **size** | **int**| The maximum number of similar ESCO occupations retrieved by the algorithm. | [optional] if omitted the server will use the default value of 1
  **min_score** | **float**| Minimum score of the similar ESCO occupations with respect to the job title queried by the user. | [optional] if omitted the server will use the default value of 0.2
 
@@ -836,7 +836,7 @@ Name | Type | Description  | Notes
 
 Similar ESCO Skills
 
- This method provides the list of n most similar ESCO skills given a *skill*. For each returned skill, the service provides also a list of the main occupations where the skill is mandatory  according to ESCO classification.  More details about ESCO skills are showed [here](https://ec.europa.eu/esco/portal/skill).  
+ This method provides the list of n most similar ESCO skills given a *skill*. For each returned skill, the service provides also a list of the main occupations where the skill is mandatory according to ESCO classification.  More details about ESCO skills are showed [here](https://ec.europa.eu/esco/portal/skill).  
 
 ### Example
 
@@ -871,7 +871,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = esco_api.ESCOApi(api_client)
     query = "query_example" # str | A word or a brief sentence in several languages.
-    lang = "it" # str | The language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Language of the similar ESCO skills. (optional) if omitted the server will use the default value of "it"
     size = 1 # int | The maximum number of similar ESCO skills retrieved by the algorithm. (optional) if omitted the server will use the default value of 1
     min_score = 0.2 # float | Minimum score of the similar ESCO skills with respect to the skill queried by the user. (optional) if omitted the server will use the default value of 0.2
 
@@ -887,7 +887,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Similar ESCO Skills
-        api_response = api_instance.similar_esco_skills_get(query, lang=lang, size=size, min_score=min_score)
+        api_response = api_instance.similar_esco_skills_get(query, dst_lang=dst_lang, size=size, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ESCOApi->similar_esco_skills_get: %s\n" % e)
@@ -899,7 +899,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| A word or a brief sentence in several languages. |
- **lang** | **str**| The language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Language of the similar ESCO skills. | [optional] if omitted the server will use the default value of "it"
  **size** | **int**| The maximum number of similar ESCO skills retrieved by the algorithm. | [optional] if omitted the server will use the default value of 1
  **min_score** | **float**| Minimum score of the similar ESCO skills with respect to the skill queried by the user. | [optional] if omitted the server will use the default value of 0.2
 

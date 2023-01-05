@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**amount** | [**RangeFloat**](RangeFloat.md) |  | 
 **currency** | [**Currency**](Currency.md) |  | 
-**amount** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | 
 **frequency** | [**Frequency**](Frequency.md) |  | [optional] 
 **type** | [**BaseSalariesType**](BaseSalariesType.md) |  | [optional] 
 

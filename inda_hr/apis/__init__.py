@@ -5,7 +5,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.application_management_api import ApplicationManagementApi
+#   from inda_hr.api.application_management_api import ApplicationManagementApi
 #
 # or import this package, but before doing it, use:
 #

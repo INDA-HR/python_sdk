@@ -54,7 +54,7 @@ with inda_hr.ApiClient(configuration) as api_client:
         file=open('/path/to/file', 'rb'),
         file_ext="file_ext_example",
     ) # BaseFileDoc | 
-    lang = "it" # str | Language model to use to interpret the text, default is italian. (optional)
+    src_lang = "it" # str | Language to use to interpret the text. If missing, language detection is performed. (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -68,7 +68,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Anonymize CV
-        api_response = api_instance.anonymize_cv_post(base_file_doc, lang=lang)
+        api_response = api_instance.anonymize_cv_post(base_file_doc, src_lang=src_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ResumeParsingApi->anonymize_cv_post: %s\n" % e)
@@ -80,7 +80,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **base_file_doc** | [**BaseFileDoc**](BaseFileDoc.md)|  |
- **lang** | **str**| Language model to use to interpret the text, default is italian. | [optional]
+ **src_lang** | **str**| Language to use to interpret the text. If missing, language detection is performed. | [optional]
 
 ### Return type
 
@@ -345,7 +345,8 @@ with inda_hr.ApiClient(configuration) as api_client:
         file=open('/path/to/file', 'rb'),
         file_ext="file_ext_example",
     ) # BaseFile | 
-    lang = "it" # str | Language to use in order to extract data from the text. Defaults to italian. (optional)
+    src_lang = "it" # str | Optional. Language to use to extract data from the *Attachment.CV.File*.If missing, the detected language from the input file text is assumed as `src_lang`. (optional)
+    dst_lang = "dst_lang_example" # str | Optional. Destination language in which the following *Data* entities are translated: *Skills*, *WorkExperiences.Skills*, *JobTitles*, *WorkExperiences.PositionTitle* and *Languages*.If missing, the input or detected `src_lang` is assumed as `dst_lang`. (optional)
     graphics = False # bool | Whether to read skill graphs such as bars, pie charts, and symbols. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
@@ -360,7 +361,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Parse Resume
-        api_response = api_instance.parse_resume_post(base_file, lang=lang, graphics=graphics)
+        api_response = api_instance.parse_resume_post(base_file, src_lang=src_lang, dst_lang=dst_lang, graphics=graphics)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling ResumeParsingApi->parse_resume_post: %s\n" % e)
@@ -372,7 +373,8 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **base_file** | [**BaseFile**](BaseFile.md)|  |
- **lang** | **str**| Language to use in order to extract data from the text. Defaults to italian. | [optional]
+ **src_lang** | **str**| Optional. Language to use to extract data from the *Attachment.CV.File*.If missing, the detected language from the input file text is assumed as &#x60;src_lang&#x60;. | [optional]
+ **dst_lang** | **str**| Optional. Destination language in which the following *Data* entities are translated: *Skills*, *WorkExperiences.Skills*, *JobTitles*, *WorkExperiences.PositionTitle* and *Languages*.If missing, the input or detected &#x60;src_lang&#x60; is assumed as &#x60;dst_lang&#x60;. | [optional]
  **graphics** | **bool**| Whether to read skill graphs such as bars, pie charts, and symbols. | [optional] if omitted the server will use the default value of False
 
 ### Return type

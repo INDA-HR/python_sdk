@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Career Recommendation
 
- This method provides an ordered list of recommended jobs transition, given an origin occupation. First, the algorithm  calculates the ESCO occupation that best matches the input job title. The ESCO match is provided  only if the match score is higher than `min_score`.  Viability, salary, and automation risk define the transition recommendations, and the user can select them by the *TransitionType* field: - `viable`: the algorithm recommends all similar occupations, ordered by similarity. No other considerations are made. - `desirable`: the algorithm recommends all similar occupations that offer comparable or higher pay levels. - `safe_desirable`: the algorithm recommends the subset of roles that will likely reduce    a worker's exposure to automation risk among the `desirable` transition.   - `strictly_safe_desirable`: the algorithm recommends among the `desirable` transition, the subset of roles with    lower automation risk and higher prevalence of bottleneck tasks. 
+This method provides an ordered list of recommended jobs transition, given an origin occupation. First, the algorithm  calculates the ESCO occupation that best matches the input job title. The ESCO match is provided  only if the match score is higher than `min_score`.  Viability, salary, and automation risk define the transition recommendations, and the user can select them by the *TransitionType* field: - `viable`: the algorithm recommends all similar occupations, ordered by similarity. No other considerations are made. - `desirable`: the algorithm recommends all similar occupations that offer comparable or higher pay levels. - `safe_desirable`: the algorithm recommends the subset of roles that will likely reduce    a worker's exposure to automation risk among the `desirable` transition.   - `strictly_safe_desirable`: the algorithm recommends among the `desirable` transition, the subset of roles with    lower automation risk and higher prevalence of bottleneck tasks.
 
 ### Example
 
@@ -54,7 +54,7 @@ with inda_hr.ApiClient(configuration) as api_client:
         origin_occupation="origin_occupation_example",
         transition_type="viable",
     ) # CareerTransitionRequest | 
-    lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
     min_score = 0.2 # float | Minimum similarity score for ESCO mapping. (optional) if omitted the server will use the default value of 0.2
 
     # example passing only required values which don't have defaults set
@@ -69,7 +69,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Career Recommendation
-        api_response = api_instance.career_recommendation_post(career_transition_request, lang=lang, min_score=min_score)
+        api_response = api_instance.career_recommendation_post(career_transition_request, dst_lang=dst_lang, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling MappingCareerCausewaysApi->career_recommendation_post: %s\n" % e)
@@ -81,7 +81,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **career_transition_request** | [**CareerTransitionRequest**](CareerTransitionRequest.md)|  |
- **lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
  **min_score** | **float**| Minimum similarity score for ESCO mapping. | [optional] if omitted the server will use the default value of 0.2
 
 ### Return type
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 Occupation Activities Comparison
 
- This method provides a detailed comparison of the principal activities of the origin and destination occupation.  For each activity, the method shows the gap between the two occupations.   The activity comparison is based n the skill ESCO level. It ranges from one to three,  and it is related to the specificity of the activity.   
+This method provides a detailed comparison of the principal activities of the origin and destination occupation.  For each activity, the method shows the gap between the two occupations.   The activity comparison is based n the skill ESCO level. It ranges from one to three,  and it is related to the specificity of the activity.
 
 ### Example
 
@@ -155,7 +155,7 @@ with inda_hr.ApiClient(configuration) as api_client:
         destination_occupation="destination_occupation_example",
         esco_level=1.0,
     ) # WorkActivityComparisonRequest | 
-    lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
     min_score = 0.2 # float | Minimum similarity score for ESCO mapping. (optional) if omitted the server will use the default value of 0.2
 
     # example passing only required values which don't have defaults set
@@ -170,7 +170,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Occupation Activities Comparison
-        api_response = api_instance.occupation_activities_comparison_post(work_activity_comparison_request, lang=lang, min_score=min_score)
+        api_response = api_instance.occupation_activities_comparison_post(work_activity_comparison_request, dst_lang=dst_lang, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling MappingCareerCausewaysApi->occupation_activities_comparison_post: %s\n" % e)
@@ -182,7 +182,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **work_activity_comparison_request** | [**WorkActivityComparisonRequest**](WorkActivityComparisonRequest.md)|  |
- **lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
  **min_score** | **float**| Minimum similarity score for ESCO mapping. | [optional] if omitted the server will use the default value of 0.2
 
 ### Return type
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 Occupation Skill Comparison
 
- This method provides a detailed comparison of the skills of the origin and destination occupations.  Such comparison helps compare the skill gaps among the occupations. Each skill of the origin occupation  is mapped to the most similar skill of the destination occupation. The mapping is one to one.   Skills are split in: - `essential`: only the most relevant skills for such occupation are considered according to ESCO Classification; - `optional`: both essential and optional skills are considered according to ESCO Classification.  
+This method provides a detailed comparison of the skills of the origin and destination occupations.  Such comparison helps compare the skill gaps among the occupations. Each skill of the origin occupation  is mapped to the most similar skill of the destination occupation. The mapping is one to one.   Skills are split in: - `essential`: only the most relevant skills for such occupation are considered according to ESCO Classification; - `optional`: both essential and optional skills are considered according to ESCO Classification.
 
 ### Example
 
@@ -256,7 +256,7 @@ with inda_hr.ApiClient(configuration) as api_client:
         destination_occupation="destination_occupation_example",
         skill_match="optional",
     ) # OccupationSkillsComparisonRequest | 
-    lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
     min_score = 0.2 # float | Minimum similarity score for ESCO mapping. (optional) if omitted the server will use the default value of 0.2
 
     # example passing only required values which don't have defaults set
@@ -271,7 +271,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Occupation Skill Comparison
-        api_response = api_instance.occupation_skill_comparison_post(occupation_skills_comparison_request, lang=lang, min_score=min_score)
+        api_response = api_instance.occupation_skill_comparison_post(occupation_skills_comparison_request, dst_lang=dst_lang, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling MappingCareerCausewaysApi->occupation_skill_comparison_post: %s\n" % e)
@@ -283,7 +283,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **occupation_skills_comparison_request** | [**OccupationSkillsComparisonRequest**](OccupationSkillsComparisonRequest.md)|  |
- **lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
  **min_score** | **float**| Minimum similarity score for ESCO mapping. | [optional] if omitted the server will use the default value of 0.2
 
 ### Return type
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 
 Upskilling simulator
 
- Learning and getting new skills usually leads to new job opportunities. Given an origin occupation and a list of acquired skills,  this method provides an updated ordered list of recommended jobs transition based on your occupation skills and your acquired skills.  First, the algorithm  calculates the ESCO occupation that best matches the input job title and ESCO skills that best fits the input skills list.  The ESCO match is provided  only if the match score is higher than `min_score`.    Viability, salary, and automation risk define the transition recommendations, and the user can select them by the *TransitionType* field: - `viable`: the algorithm recommends all similar occupations, ordered by similarity. No other considerations are made; - `desirable`: the algorithm recommends all similar occupations that offer comparable or higher pay levels; - `safe_desirable`: the algorithm recommends the subset of roles that will likely reduce     a worker's exposure to automation risk among the `desirable` transition;   - `strictly_safe_desirable`: the algorithm recommends among the `desirable` transition, the subset of roles with     lower automation risk and higher prevalence of bottleneck tasks. 
+Learning and getting new skills usually leads to new job opportunities. Given an origin occupation and a list of acquired skills,  this method provides an updated ordered list of recommended jobs transition based on your occupation skills and your acquired skills.  First, the algorithm  calculates the ESCO occupation that best matches the input job title and ESCO skills that best fits the input skills list.  The ESCO match is provided  only if the match score is higher than `min_score`.    Viability, salary, and automation risk define the transition recommendations, and the user can select them by the *TransitionType* field: - `viable`: the algorithm recommends all similar occupations, ordered by similarity. No other considerations are made; - `desirable`: the algorithm recommends all similar occupations that offer comparable or higher pay levels; - `safe_desirable`: the algorithm recommends the subset of roles that will likely reduce     a worker's exposure to automation risk among the `desirable` transition;   - `strictly_safe_desirable`: the algorithm recommends among the `desirable` transition, the subset of roles with     lower automation risk and higher prevalence of bottleneck tasks.
 
 ### Example
 
@@ -359,7 +359,7 @@ with inda_hr.ApiClient(configuration) as api_client:
             "skills_example",
         ],
     ) # UpskillingRequest | 
-    lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
+    dst_lang = "it" # str | Output language. (optional) if omitted the server will use the default value of "it"
     min_score = 0.2 # float | Minimum similarity score for ESCO mapping. (optional) if omitted the server will use the default value of 0.2
 
     # example passing only required values which don't have defaults set
@@ -374,7 +374,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Upskilling simulator
-        api_response = api_instance.upskilling_simulator_post(upskilling_request, lang=lang, min_score=min_score)
+        api_response = api_instance.upskilling_simulator_post(upskilling_request, dst_lang=dst_lang, min_score=min_score)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling MappingCareerCausewaysApi->upskilling_simulator_post: %s\n" % e)
@@ -386,7 +386,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **upskilling_request** | [**UpskillingRequest**](UpskillingRequest.md)|  |
- **lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
+ **dst_lang** | **str**| Output language. | [optional] if omitted the server will use the default value of "it"
  **min_score** | **float**| Minimum similarity score for ESCO mapping. | [optional] if omitted the server will use the default value of 0.2
 
 ### Return type

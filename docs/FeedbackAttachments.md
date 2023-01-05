@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pic** | [**ImageMetadata**](ImageMetadata.md) |  | [optional] 
-**cv** | [**ParseResumeTextFile**](ParseResumeTextFile.md) |  | [optional] 
+**cv** | [**ParseResumeDocument**](ParseResumeDocument.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

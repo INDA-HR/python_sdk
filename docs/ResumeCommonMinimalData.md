@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**job_title** | [**ResumeJobTitle**](ResumeJobTitle.md) |  | [optional] 
+**job_title** | [**OptionalResumeJobTitle**](OptionalResumeJobTitle.md) |  | [optional] 
 **personal_info** | [**PersonalInfo**](PersonalInfo.md) |  | [optional] 
 **contact_info** | [**ResumeContactInfoContactInfo**](ResumeContactInfoContactInfo.md) |  | [optional] 
 **person_location** | [**PersonLocation**](PersonLocation.md) |  | [optional] 

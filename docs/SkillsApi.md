@@ -48,9 +48,10 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = skills_api.SkillsApi(api_client)
     query = "query_example" # str | Input skill to be analyzed
-    size = 15 # int | Number of similar skills to return. (optional) if omitted the server will use the default value of 15
+    size = 5 # int | Number of similar skills to return. (optional) if omitted the server will use the default value of 5
     min_score = 0.5 # float | Minimum pertinence score. (optional) if omitted the server will use the default value of 0.5
-    lang = "it" # str | Language of the skill. (optional) if omitted the server will use the default value of "it"
+    src_lang = "it" # str | Optional. Language of the input skills.If missing, the detected language is assumed as `src_lang`. (optional)
+    dst_lang = "it" # str | Optional. Language of the input skills.If missing, the detected language is assumed as `src_lang`. (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -64,7 +65,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Similar Skills
-        api_response = api_instance.similar_skills_get(query, size=size, min_score=min_score, lang=lang)
+        api_response = api_instance.similar_skills_get(query, size=size, min_score=min_score, src_lang=src_lang, dst_lang=dst_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling SkillsApi->similar_skills_get: %s\n" % e)
@@ -76,9 +77,10 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| Input skill to be analyzed |
- **size** | **int**| Number of similar skills to return. | [optional] if omitted the server will use the default value of 15
+ **size** | **int**| Number of similar skills to return. | [optional] if omitted the server will use the default value of 5
  **min_score** | **float**| Minimum pertinence score. | [optional] if omitted the server will use the default value of 0.5
- **lang** | **str**| Language of the skill. | [optional] if omitted the server will use the default value of "it"
+ **src_lang** | **str**| Optional. Language of the input skills.If missing, the detected language is assumed as &#x60;src_lang&#x60;. | [optional]
+ **dst_lang** | **str**| Optional. Language of the input skills.If missing, the detected language is assumed as &#x60;src_lang&#x60;. | [optional]
 
 ### Return type
 
@@ -149,7 +151,7 @@ with inda_hr.ApiClient(configuration) as api_client:
             "skills_example",
         ],
     ) # SkillsClassificationRequest | 
-    lang = "it" # str | Language of the skill. (optional) if omitted the server will use the default value of "it"
+    src_lang = "it" # str | Language of the input skills. (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -163,7 +165,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Skills Classification
-        api_response = api_instance.skills_classification_post(skills_classification_request, lang=lang)
+        api_response = api_instance.skills_classification_post(skills_classification_request, src_lang=src_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling SkillsApi->skills_classification_post: %s\n" % e)
@@ -175,7 +177,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **skills_classification_request** | [**SkillsClassificationRequest**](SkillsClassificationRequest.md)|  |
- **lang** | **str**| Language of the skill. | [optional] if omitted the server will use the default value of "it"
+ **src_lang** | **str**| Language of the input skills. | [optional]
 
 ### Return type
 

@@ -58,40 +58,40 @@ with inda_hr.ApiClient(configuration) as api_client:
             size=Size(
                 value="value_example",
             ),
-            description=BaseEmploymentsValueModelStrictStr(
+            description=BaseLocationsValueModelStrictStr(
                 value="value_example",
             ),
             headquarters=[
                 Headquarter(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     location=CompanyCommonLocation(
-                        city=BaseEmploymentsValueModelStrictStr(
+                        city=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        country=BaseEmploymentsValueModelStrictStr(
+                        country=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        geo_coordinates=ValueModelGeoLocation(
-                            value=GeoLocation(
+                        geo_coordinates=ValueModelMongoDBGeoLocation(
+                            value=MongoDBGeoLocation(
                                 lat=-90.0,
                                 lon=-180.0,
                             ),
                         ),
-                        country_code=BaseEmploymentsValueModelStrictStr(
+                        country_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        postal_code=BaseEmploymentsValueModelStrictStr(
+                        postal_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        street_address=BaseEmploymentsValueModelStrictStr(
+                        street_address=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        county=BaseEmploymentsValueModelStrictStr(
+                        county=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        region=BaseEmploymentsValueModelStrictStr(
+                        region=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
                     ),
@@ -99,35 +99,35 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             branches=[
                 Branch(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     location=CompanyCommonLocation(
-                        city=BaseEmploymentsValueModelStrictStr(
+                        city=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        country=BaseEmploymentsValueModelStrictStr(
+                        country=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        geo_coordinates=ValueModelGeoLocation(
-                            value=GeoLocation(
+                        geo_coordinates=ValueModelMongoDBGeoLocation(
+                            value=MongoDBGeoLocation(
                                 lat=-90.0,
                                 lon=-180.0,
                             ),
                         ),
-                        country_code=BaseEmploymentsValueModelStrictStr(
+                        country_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        postal_code=BaseEmploymentsValueModelStrictStr(
+                        postal_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        street_address=BaseEmploymentsValueModelStrictStr(
+                        street_address=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        county=BaseEmploymentsValueModelStrictStr(
+                        county=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        region=BaseEmploymentsValueModelStrictStr(
+                        region=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
                     ),
@@ -139,7 +139,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                 ),
             ],
             specialties=[
-                BaseEmploymentsValueModelStrictStr(
+                BaseLocationsValueModelStrictStr(
                     value="value_example",
                 ),
             ],
@@ -164,13 +164,13 @@ with inda_hr.ApiClient(configuration) as api_client:
             ),
             products=[
                 Asset(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    description=BaseEmploymentsValueModelStrictStr(
+                    description=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    sector=BaseEmploymentsValueModelStrictStr(
+                    sector=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     tags=[
@@ -180,13 +180,13 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             services=[
                 Asset(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    description=BaseEmploymentsValueModelStrictStr(
+                    description=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    sector=BaseEmploymentsValueModelStrictStr(
+                    sector=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     tags=[
@@ -202,7 +202,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ),
             ],
-            name=BaseEmploymentsValueModelStrictStr(
+            name=BaseLocationsValueModelStrictStr(
                 value="value_example",
             ),
         ),
@@ -243,8 +243,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Company Successfully Added |  -  |
-**400** | Bad Request |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -264,7 +264,6 @@ Company Autocomplete
 import time
 import inda_hr
 from inda_hr.api import company_management_api
-from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.http_validation_error import HTTPValidationError
 from inda_hr.model.company_autocomplete_response import CompanyAutocompleteResponse
 from pprint import pprint
@@ -289,11 +288,23 @@ with inda_hr.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = company_management_api.CompanyManagementApi(api_client)
     term = "term_example" # str | Token to be completed
+    size = 10 # int | Response size. (optional) if omitted the server will use the default value of 10
+    token_order = "any" # str | Whether to autocomplete the term in a sequential way or not. The default *any* value guarantees good performances as well as flexible results. (optional) if omitted the server will use the default value of "any"
+    fuzzy = False # bool | Fuzzy search. If *True* performs a fuzzy search with max edits set to 2. (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Company Autocomplete
         api_response = api_instance.company_autocomplete_get(term)
+        pprint(api_response)
+    except inda_hr.ApiException as e:
+        print("Exception when calling CompanyManagementApi->company_autocomplete_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Company Autocomplete
+        api_response = api_instance.company_autocomplete_get(term, size=size, token_order=token_order, fuzzy=fuzzy)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling CompanyManagementApi->company_autocomplete_get: %s\n" % e)
@@ -305,6 +316,9 @@ with inda_hr.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **term** | **str**| Token to be completed |
+ **size** | **int**| Response size. | [optional] if omitted the server will use the default value of 10
+ **token_order** | **str**| Whether to autocomplete the term in a sequential way or not. The default *any* value guarantees good performances as well as flexible results. | [optional] if omitted the server will use the default value of "any"
+ **fuzzy** | **bool**| Fuzzy search. If *True* performs a fuzzy search with max edits set to 2. | [optional] if omitted the server will use the default value of False
 
 ### Return type
 
@@ -325,7 +339,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully Found Companies |  -  |
-**404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -407,7 +420,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Company Successfully Retrieved |  -  |
 **404** | Not Found |  -  |
-**400** | Bad Request |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -461,40 +473,40 @@ with inda_hr.ApiClient(configuration) as api_client:
             size=Size(
                 value="value_example",
             ),
-            description=JobadSectionsValueModelStrictStr(
+            description=BaseLocationsValueModelStrictStr(
                 value="value_example",
             ),
             headquarters=[
                 Headquarter(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     location=CompanyCommonLocation(
-                        city=BaseEmploymentsValueModelStrictStr(
+                        city=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        country=BaseEmploymentsValueModelStrictStr(
+                        country=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        geo_coordinates=ValueModelGeoLocation(
-                            value=GeoLocation(
+                        geo_coordinates=ValueModelMongoDBGeoLocation(
+                            value=MongoDBGeoLocation(
                                 lat=-90.0,
                                 lon=-180.0,
                             ),
                         ),
-                        country_code=BaseEmploymentsValueModelStrictStr(
+                        country_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        postal_code=BaseEmploymentsValueModelStrictStr(
+                        postal_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        street_address=BaseEmploymentsValueModelStrictStr(
+                        street_address=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        county=BaseEmploymentsValueModelStrictStr(
+                        county=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        region=BaseEmploymentsValueModelStrictStr(
+                        region=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
                     ),
@@ -502,35 +514,35 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             branches=[
                 Branch(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     location=CompanyCommonLocation(
-                        city=BaseEmploymentsValueModelStrictStr(
+                        city=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        country=BaseEmploymentsValueModelStrictStr(
+                        country=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        geo_coordinates=ValueModelGeoLocation(
-                            value=GeoLocation(
+                        geo_coordinates=ValueModelMongoDBGeoLocation(
+                            value=MongoDBGeoLocation(
                                 lat=-90.0,
                                 lon=-180.0,
                             ),
                         ),
-                        country_code=BaseEmploymentsValueModelStrictStr(
+                        country_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        postal_code=BaseEmploymentsValueModelStrictStr(
+                        postal_code=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        street_address=BaseEmploymentsValueModelStrictStr(
+                        street_address=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        county=BaseEmploymentsValueModelStrictStr(
+                        county=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
-                        region=BaseEmploymentsValueModelStrictStr(
+                        region=BaseLocationsValueModelStrictStr(
                             value="value_example",
                         ),
                     ),
@@ -542,7 +554,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                 ),
             ],
             specialties=[
-                JobadSectionsValueModelStrictStr(
+                BaseLocationsValueModelStrictStr(
                     value="value_example",
                 ),
             ],
@@ -567,13 +579,13 @@ with inda_hr.ApiClient(configuration) as api_client:
             ),
             products=[
                 Asset(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    description=BaseEmploymentsValueModelStrictStr(
+                    description=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    sector=BaseEmploymentsValueModelStrictStr(
+                    sector=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     tags=[
@@ -583,13 +595,13 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             services=[
                 Asset(
-                    name=BaseEmploymentsValueModelStrictStr(
+                    name=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    description=BaseEmploymentsValueModelStrictStr(
+                    description=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
-                    sector=BaseEmploymentsValueModelStrictStr(
+                    sector=BaseLocationsValueModelStrictStr(
                         value="value_example",
                     ),
                     tags=[
@@ -644,7 +656,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Company Successfully Updated |  -  |
-**400** | Bad Request |  -  |
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 

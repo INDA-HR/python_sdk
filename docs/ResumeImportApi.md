@@ -4,16 +4,16 @@ All URIs are relative to *https://api.inda.ai*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**aws_import_post**](ResumeImportApi.md#aws_import_post) | **POST** /hr/v2/index/{indexname}/resumes/import/aws/ | Aws Import
+[**aws_import_post**](ResumeImportApi.md#aws_import_post) | **POST** /hr/v2/index/{indexname}/resumes/import/aws/ | AWS Import
 [**import_status_get**](ResumeImportApi.md#import_status_get) | **GET** /hr/v2/index/{indexname}/resumes/import/aws/status/ | Import Status
 
 
 # **aws_import_post**
 > ImportResponse aws_import_post(indexname, docs_import_item_request)
 
-Aws Import
+AWS Import
 
- This method imports a collection of *Files* from a *Bucket* on Amazon S3 Storage Service into the INDA index  *indexname*.  *Intervieweb* customers do not need any  *Credentials*, because their files are already in the [In-recruiting](https://www.in-recruiting.com/en/) cloud. For other users, we strongly recommend creating *ad-hoc credentials* with *read-only* rights. These credentials will not be stored by us anyway in any form.  The array of *Files* should contain a collection of resumes. Each file must have an *URL*, which is the file path inside the *Bucket*, an *InternalID* (i.e., an unique identifier used by the user internal system), and a *Resume*, which contains all the structured data to be imported in INDA. The *Resume* field has the same structure used in [Add Resume](https://api.inda.ai/hr/docs/v2/#operation/add_resume__POST), without the fields *Attachments.CV.File* (the file binary) and  *Attachments.CV.FileExt* (the file extension). The *Resume* data in the request will not be validated in input, but rather later during the request preprocessing.  The list of documents in the response accounts for documents that were successfully validated and downloaded from the *Bucket*. Note that these documents will be processed in the background before they can be uploaded to *indexname* and this may cause some small changes in the list of documents actually uploaded.  The response contains (*i*) a *Stats* field which provides a brief overview of the number of *Sent* and *Queued* documents, (*ii*) a list of queued *Resumes* with an INDA *ResumeID* and its user *InternalID*, and (*iii*) a list of *Errors* raised during the preprocessing stage.  In order to obtain updated information on the import progress and on the failures that might happen during the import process, the user can use the *import_id* through the following methods: + [Get Failures](https://api.inda.ai/hr/docs/v2/#operation/get_failures__GET) + [Import Status](https://api.inda.ai/hr/docs/v2/#operation/import_status__GET) 
+ This method imports a collection of *Files* from a *Bucket* on Amazon S3 Storage Service into the INDA index  *indexname*.  *Intervieweb* customers do not need any  *Credentials*, because their files are already in the [Inrecruiting](https://www.in-recruiting.com/en/) cloud. For other users, we strongly recommend creating *ad-hoc credentials* with *read-only* rights. These credentials will not be stored by us anyway in any form.  The array of *Files* should contain a collection of resumes. Each file must have an *URL*, which is the file path inside the *Bucket*, an *InternalID* (i.e., an unique identifier used by the user internal system), and a *Resume*, which contains all the structured data to be imported in INDA. The *Resume* field has the same structure used in [Add Resume](https://api.inda.ai/hr/docs/v2/#operation/add_resume__POST), without the fields *Attachments.CV.File* (the file binary) and  *Attachments.CV.FileExt* (the file extension). The *Resume* data in the request will not be validated in input, but rather later during the request preprocessing.  The list of documents in the response accounts for documents that were successfully validated and downloaded from the *Bucket*. Note that these documents will be processed in the background before they can be uploaded to *indexname* and this may cause some small changes in the list of documents actually uploaded.  The response contains (*i*) a *Stats* field which provides a brief overview of the number of *Sent* and *Queued* documents, (*ii*) a list of queued *Resumes* with an INDA *ResumeID* and its user *InternalID*, and (*iii*) a list of *Errors* raised during the preprocessing stage.  In order to obtain updated information on the import progress and on the failures that might happen during the import process, the user can use the *import_id* through the following methods: + [Get Failures](https://api.inda.ai/hr/docs/v2/#operation/get_failures__GET) + [Import Status](https://api.inda.ai/hr/docs/v2/#operation/import_status__GET) 
 
 ### Example
 
@@ -55,10 +55,8 @@ with inda_hr.ApiClient(configuration) as api_client:
             DocsBucketItem(
                 resume=DocsImportResume(
                     data=ResumeCommonData(
-                        job_title=ResumeJobTitle(
-                            details=ResumeJobTitleDetails(
-                                is_validated=False,
-                                entity_type="entity_type_example",
+                        job_title=OptionalResumeJobTitle(
+                            details=OptionalResumeJobTitleDetails(
                                 text_positions=[
                                     TextPosition(
                                         start=1,
@@ -66,7 +64,23 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                 ],
                                 raw_value="raw_value_example",
+                                raw_values=[
+                                    TextDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                    ),
+                                ],
+                                is_validated=False,
+                                entity_type="entity_type_example",
                                 score=0.75,
+                                code=ResumeJobTitleCode(
+                                    key="key_example",
+                                ),
                             ),
                             value="value_example",
                         ),
@@ -74,8 +88,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             person_name=ResumePersonNamePersonName(
                                 prefix=ResumePersonNamePrefix(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -83,13 +95,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 given_name=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -97,14 +120,136 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 middle_names=[
                                     BaseModelsName(
                                         details=BaseDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
                                             is_validated=False,
                                             entity_type="entity_type_example",
+                                        ),
+                                        value="value_example",
+                                    ),
+                                ],
+                                family_name=BaseModelsName(
+                                    details=BaseDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
+                                    ),
+                                    value="value_example",
+                                ),
+                                suffix=ResumePersonNameSuffix(
+                                    details=BaseDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
+                                    ),
+                                    value="value_example",
+                                ),
+                                formatted_name=BaseModelsName(
+                                    details=BaseDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
+                                    ),
+                                    value="value_example",
+                                ),
+                            ),
+                            birthdate=Date(
+                                details=BaseDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -113,70 +258,14 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ],
                                             raw_value="raw_value_example",
                                         ),
-                                        value="value_example",
-                                    ),
-                                ],
-                                family_name=BaseModelsName(
-                                    details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
-                                        text_positions=[
-                                            TextPosition(
-                                                start=1,
-                                                end=1,
-                                            ),
-                                        ],
-                                        raw_value="raw_value_example",
-                                    ),
-                                    value="value_example",
-                                ),
-                                suffix=ResumePersonNameSuffix(
-                                    details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
-                                        text_positions=[
-                                            TextPosition(
-                                                start=1,
-                                                end=1,
-                                            ),
-                                        ],
-                                        raw_value="raw_value_example",
-                                    ),
-                                    value="value_example",
-                                ),
-                                formatted_name=BaseModelsName(
-                                    details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
-                                        text_positions=[
-                                            TextPosition(
-                                                start=1,
-                                                end=1,
-                                            ),
-                                        ],
-                                        raw_value="raw_value_example",
-                                    ),
-                                    value="value_example",
-                                ),
-                            ),
-                            birthdate=Date(
-                                details=BaseDetails(
+                                    ],
                                     is_validated=False,
                                     entity_type="entity_type_example",
-                                    text_positions=[
-                                        TextPosition(
-                                            start=1,
-                                            end=1,
-                                        ),
-                                    ],
-                                    raw_value="raw_value_example",
                                 ),
                                 value=dateutil_parser('1970-01-01').date(),
                             ),
                             age=Age(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -184,14 +273,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value=1,
                             ),
                             nationalities=[
                                 Nationality(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -199,6 +299,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -206,8 +319,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             citizenships=[
                                 Citizenship(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -215,14 +326,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                             ],
                             gender=Gender(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -230,14 +352,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
                             disability=Disability(
                                 disability_level_code=DisabilityLevelCode(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -245,13 +378,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 disability_summary=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -259,6 +403,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -266,8 +423,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             protected_groups=[
                                 ProtectedGroup(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -275,14 +430,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                             ],
                             marital_status=MaritalStatus(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -290,13 +456,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
                             number_of_children=NumberOfChildren(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -304,6 +481,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value=1,
                             ),
@@ -313,8 +503,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ResumePhoneNumbersPhoneNumber(
                                     number=ResumePhoneNumbersNumber(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -322,6 +510,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value=OptionalPhoneNumber(
                                             country_code="AW",
@@ -331,8 +532,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     label=ResumePhoneNumbersPhoneLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -340,6 +539,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -349,8 +561,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ResumeEmailAddressEmailAddress(
                                     address=ResumeEmailAddressAddress(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -358,13 +568,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeEmailAddressEmailLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -372,6 +593,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -381,8 +615,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -390,13 +622,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -404,6 +647,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -414,8 +670,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             current_location=ResumeLocationsLocation(
                                 city=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -423,13 +677,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 country=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -437,6 +702,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -451,8 +729,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 country_code=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -460,13 +736,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 postal_code=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -474,13 +761,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 street_address=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -488,13 +786,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 county=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -502,13 +811,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 region=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -516,6 +836,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -523,8 +856,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             permanent_location=ResumeLocationsLocation(
                                 city=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -532,13 +863,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 country=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -546,6 +888,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -560,8 +915,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 country_code=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -569,13 +922,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 postal_code=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -583,13 +947,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 street_address=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -597,13 +972,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 county=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -611,13 +997,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 region=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -625,6 +1022,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -632,8 +1042,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                         ),
                         headline=Text(
                             details=BaseDetails(
-                                is_validated=False,
-                                entity_type="entity_type_example",
                                 text_positions=[
                                     TextPosition(
                                         start=1,
@@ -641,6 +1049,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                 ],
                                 raw_value="raw_value_example",
+                                raw_values=[
+                                    TextDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                    ),
+                                ],
+                                is_validated=False,
+                                entity_type="entity_type_example",
                             ),
                             value="value_example",
                         ),
@@ -654,8 +1075,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 education_title=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -663,13 +1082,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 field_of_study=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -677,13 +1107,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 final_grade=FinalGrade(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -691,6 +1132,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=FinalGradeValue(
                                         score_text="score_text_example",
@@ -707,8 +1161,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -716,13 +1168,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -730,13 +1193,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -744,6 +1218,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -756,8 +1243,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 location=ResumeLocationsLocation(
                                     city=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -765,13 +1250,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     country=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -779,6 +1275,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -793,8 +1302,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     country_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -802,13 +1309,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     postal_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -816,13 +1334,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     street_address=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -830,13 +1359,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     county=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -844,13 +1384,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     region=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -858,6 +1409,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -865,8 +1429,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 organization=Organization(
                                     organization_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -874,13 +1436,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     department=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -888,14 +1461,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     location=ResumeLocationsLocation(
                                         city=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -903,13 +1487,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         country=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -917,6 +1512,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -931,8 +1539,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                         country_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -940,13 +1546,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         postal_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -954,13 +1571,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         street_address=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -968,13 +1596,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         county=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -982,13 +1621,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         region=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -996,6 +1646,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -1003,8 +1666,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     link=ResumeLinkLink(
                                         url=ResumeLinkURL(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1012,13 +1673,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         label=ResumeLinkLinkLabel(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1026,12 +1698,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ),
                                     id=ID(
-                                        details=EntityBaseDetails(
+                                        details=OptionalEntityBaseDetails(
                                             is_validated=False,
                                             entity_type="entity_type_example",
                                         ),
@@ -1041,8 +1726,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 courses=[
                                     Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1050,18 +1733,30 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                 ],
+                                id="id_example",
                             ),
                         ],
                         work_experiences=[
                             WorkExperience(
                                 seniority=BaseSeniority(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1069,6 +1764,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -1078,10 +1786,8 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     value=1,
                                 ),
-                                position_title=ResumeJobTitle(
-                                    details=ResumeJobTitleDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
+                                position_title=OptionalResumeJobTitle(
+                                    details=OptionalResumeJobTitleDetails(
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1089,14 +1795,28 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                         score=0.75,
+                                        code=ResumeJobTitleCode(
+                                            key="key_example",
+                                        ),
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1104,13 +1824,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1118,13 +1849,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1132,6 +1874,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -1144,8 +1899,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 location=ResumeLocationsLocation(
                                     city=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1153,13 +1906,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     country=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1167,6 +1931,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -1181,8 +1958,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     country_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1190,13 +1965,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     postal_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1204,13 +1990,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     street_address=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1218,13 +2015,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     county=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1232,13 +2040,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     region=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1246,6 +2065,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -1253,8 +2085,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 remote_working=RemoteWorking(
                                     type=ResumeRemoteWorkingType(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1262,16 +2092,51 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
-                                    frequency=None,
+                                    frequency=ResumeRemoteWorkingFrequencyRange(
+                                        details=BaseDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
+                                        ),
+                                        range=Range(None),
+                                    ),
                                 ),
                                 employer=Organization(
                                     organization_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1279,13 +2144,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     department=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1293,14 +2169,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     location=ResumeLocationsLocation(
                                         city=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1308,13 +2195,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         country=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1322,6 +2220,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -1336,8 +2247,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                         country_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1345,13 +2254,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         postal_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1359,13 +2279,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         street_address=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1373,13 +2304,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         county=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1387,13 +2329,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         region=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1401,6 +2354,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -1408,8 +2374,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     link=ResumeLinkLink(
                                         url=ResumeLinkURL(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1417,13 +2381,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         label=ResumeLinkLinkLabel(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1431,12 +2406,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ),
                                     id=ID(
-                                        details=EntityBaseDetails(
+                                        details=OptionalEntityBaseDetails(
                                             is_validated=False,
                                             entity_type="entity_type_example",
                                         ),
@@ -1452,12 +2440,8 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                 ],
                                 skills=[
-                                    ResumeSkill(
-                                        details=ResumeSkillDetails(
-                                            proficiency_level="proficiency_level_example",
-                                            category="hard",
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
+                                    OptionalResumeSkill(
+                                        details=OptionalResumeSkillDetails(
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1465,17 +2449,34 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
+                                            proficiency_level="proficiency_level_example",
+                                            category="hard",
+                                            code=ResumeSkillCode(
+                                                key="key_example",
+                                            ),
                                             score=0.75,
                                         ),
                                         value="value_example",
                                     ),
                                 ],
+                                id="id_example",
                             ),
                         ],
                         cover_letter=Text(
                             details=BaseDetails(
-                                is_validated=False,
-                                entity_type="entity_type_example",
                                 text_positions=[
                                     TextPosition(
                                         start=1,
@@ -1483,6 +2484,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                 ],
                                 raw_value="raw_value_example",
+                                raw_values=[
+                                    TextDetails(
+                                        text_positions=[
+                                            TextPosition(
+                                                start=1,
+                                                end=1,
+                                            ),
+                                        ],
+                                        raw_value="raw_value_example",
+                                    ),
+                                ],
+                                is_validated=False,
+                                entity_type="entity_type_example",
                             ),
                             value="value_example",
                         ),
@@ -1491,8 +2505,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 person_name=ResumePersonNamePersonName(
                                     prefix=ResumePersonNamePrefix(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1500,13 +2512,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     given_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1514,14 +2537,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     middle_names=[
                                         BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1529,14 +2563,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ],
                                     family_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1544,13 +2589,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     suffix=ResumePersonNameSuffix(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1558,13 +2614,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     formatted_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1572,6 +2639,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -1581,8 +2661,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ResumePhoneNumbersPhoneNumber(
                                             number=ResumePhoneNumbersNumber(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1590,6 +2668,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value=OptionalPhoneNumber(
                                                     country_code="AW",
@@ -1599,8 +2690,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                             label=ResumePhoneNumbersPhoneLabel(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1608,6 +2697,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
@@ -1617,8 +2719,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ResumeEmailAddressEmailAddress(
                                             address=ResumeEmailAddressAddress(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1626,13 +2726,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
                                             label=ResumeEmailAddressEmailLabel(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1640,6 +2751,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
@@ -1649,8 +2773,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ResumeLinkLink(
                                             url=ResumeLinkURL(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1658,13 +2780,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
                                             label=ResumeLinkLinkLabel(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -1672,6 +2805,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
@@ -1680,8 +2826,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1689,6 +2833,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -1721,8 +2878,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             ),
                             highest_seniority_level_code=SeniorityLevelCode(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -1730,6 +2885,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
@@ -1767,8 +2935,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             ),
                             objective=Description(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -1776,13 +2942,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
                             personal_description=Description(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -1790,17 +2967,26 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
                         ),
                         skills=[
-                            ResumeSkill(
-                                details=ResumeSkillDetails(
-                                    proficiency_level="proficiency_level_example",
-                                    category="hard",
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
+                            OptionalResumeSkill(
+                                details=OptionalResumeSkillDetails(
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -1808,16 +2994,32 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
+                                    proficiency_level="proficiency_level_example",
+                                    category="hard",
+                                    code=ResumeSkillCode(
+                                        key="key_example",
+                                    ),
                                     score=0.75,
                                 ),
                                 value="value_example",
                             ),
                         ],
                         job_titles=[
-                            ResumeJobTitle(
-                                details=ResumeJobTitleDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
+                            OptionalResumeJobTitle(
+                                details=OptionalResumeJobTitleDetails(
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -1825,15 +3027,55 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                     score=0.75,
+                                    code=ResumeJobTitleCode(
+                                        key="key_example",
+                                    ),
                                 ),
                                 value="value_example",
                             ),
                         ],
                         languages=[
-                            ResumeLanguage(
-                                details=ResumeLanguageDetails(
+                            OptionalResumeLanguage(
+                                details=OptionalResumeLanguageDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                     proficiency_level="proficiency_level_example",
+                                    category="category_example",
+                                    code=ResumeLanguageCode(
+                                        key="key_example",
+                                    ),
                                     language_code="language_code_example",
                                     proficiency_level_code=ProficiencyLevelCode(
                                         cefr=CEFRLevels(
@@ -1846,15 +3088,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             spoken_production="A1",
                                         ),
                                     ),
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
-                                    text_positions=[
-                                        TextPosition(
-                                            start=1,
-                                            end=1,
-                                        ),
-                                    ],
-                                    raw_value="raw_value_example",
                                     is_primary=True,
                                 ),
                                 value="value_example",
@@ -1864,8 +3097,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Certification(
                                 certification_name=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1873,13 +3104,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1887,13 +3129,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 first_issued_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -1901,14 +3154,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 issuing_authority=Organization(
                                     organization_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1916,13 +3180,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     department=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -1930,14 +3205,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     location=ResumeLocationsLocation(
                                         city=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1945,13 +3231,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         country=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1959,6 +3256,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -1973,8 +3283,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                         country_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1982,13 +3290,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         postal_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -1996,13 +3315,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         street_address=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2010,13 +3340,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         county=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2024,13 +3365,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         region=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2038,6 +3390,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2045,8 +3410,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     link=ResumeLinkLink(
                                         url=ResumeLinkURL(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2054,13 +3417,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         label=ResumeLinkLinkLabel(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2068,12 +3442,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ),
                                     id=ID(
-                                        details=EntityBaseDetails(
+                                        details=OptionalEntityBaseDetails(
                                             is_validated=False,
                                             entity_type="entity_type_example",
                                         ),
@@ -2082,8 +3469,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 url=ResumeLinkURL(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2091,6 +3476,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -2100,8 +3498,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Publication(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2109,13 +3505,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2123,13 +3530,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 doi=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2137,13 +3555,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 year=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2151,14 +3580,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2166,13 +3606,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2180,6 +3631,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -2190,8 +3654,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Award(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2199,13 +3661,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2213,13 +3686,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 year=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2227,14 +3711,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 awarder=Organization(
                                     organization_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2242,13 +3737,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     department=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2256,14 +3762,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     location=ResumeLocationsLocation(
                                         city=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2271,13 +3788,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         country=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2285,6 +3813,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2299,8 +3840,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                         country_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2308,13 +3847,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         postal_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2322,13 +3872,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         street_address=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2336,13 +3897,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         county=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2350,13 +3922,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         region=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2364,6 +3947,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2371,8 +3967,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     link=ResumeLinkLink(
                                         url=ResumeLinkURL(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2380,13 +3974,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         label=ResumeLinkLinkLabel(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2394,12 +3999,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ),
                                     id=ID(
-                                        details=EntityBaseDetails(
+                                        details=OptionalEntityBaseDetails(
                                             is_validated=False,
                                             entity_type="entity_type_example",
                                         ),
@@ -2412,8 +4030,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Project(
                                 project_name=BaseModelsName(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2421,13 +4037,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2435,14 +4062,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 roles=[
                                     Role(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2450,6 +4088,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -2457,8 +4108,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 keywords=[
                                     Keyword(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2466,14 +4115,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                 ],
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2481,13 +4141,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2495,6 +4166,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -2507,8 +4191,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2516,13 +4198,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2530,6 +4223,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -2540,8 +4246,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Achievement(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2549,13 +4253,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2563,13 +4278,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 year=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2577,14 +4303,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2592,13 +4329,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2606,6 +4354,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -2616,8 +4377,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Patent(
                                 patent_title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2625,13 +4384,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 patent_id=Text(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2639,13 +4409,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 patent_status=PatentStatus(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2653,13 +4434,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2667,6 +4459,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
@@ -2674,8 +4479,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ResumePersonNamePersonName(
                                         prefix=ResumePersonNamePrefix(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2683,13 +4486,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         given_name=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2697,14 +4511,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         middle_names=[
                                             BaseModelsName(
                                                 details=BaseDetails(
-                                                    is_validated=False,
-                                                    entity_type="entity_type_example",
                                                     text_positions=[
                                                         TextPosition(
                                                             start=1,
@@ -2712,14 +4537,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                         ),
                                                     ],
                                                     raw_value="raw_value_example",
+                                                    raw_values=[
+                                                        TextDetails(
+                                                            text_positions=[
+                                                                TextPosition(
+                                                                    start=1,
+                                                                    end=1,
+                                                                ),
+                                                            ],
+                                                            raw_value="raw_value_example",
+                                                        ),
+                                                    ],
+                                                    is_validated=False,
+                                                    entity_type="entity_type_example",
                                                 ),
                                                 value="value_example",
                                             ),
                                         ],
                                         family_name=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2727,13 +4563,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         suffix=ResumePersonNameSuffix(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2741,13 +4588,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         formatted_name=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2755,6 +4613,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2763,8 +4634,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 issuing_authority=Organization(
                                     organization_name=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2772,13 +4641,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     department=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -2786,14 +4666,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     location=ResumeLocationsLocation(
                                         city=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2801,13 +4692,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         country=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2815,6 +4717,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2829,8 +4744,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                         country_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2838,13 +4751,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         postal_code=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2852,13 +4776,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         street_address=Text(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2866,13 +4801,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         county=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2880,13 +4826,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         region=BaseModelsName(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2894,6 +4851,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
@@ -2901,8 +4871,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     link=ResumeLinkLink(
                                         url=ResumeLinkURL(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2910,13 +4878,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                         label=ResumeLinkLinkLabel(
                                             details=BaseDetails(
-                                                is_validated=False,
-                                                entity_type="entity_type_example",
                                                 text_positions=[
                                                     TextPosition(
                                                         start=1,
@@ -2924,12 +4903,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                     ),
                                                 ],
                                                 raw_value="raw_value_example",
+                                                raw_values=[
+                                                    TextDetails(
+                                                        text_positions=[
+                                                            TextPosition(
+                                                                start=1,
+                                                                end=1,
+                                                            ),
+                                                        ],
+                                                        raw_value="raw_value_example",
+                                                    ),
+                                                ],
+                                                is_validated=False,
+                                                entity_type="entity_type_example",
                                             ),
                                             value="value_example",
                                         ),
                                     ),
                                     id=ID(
-                                        details=EntityBaseDetails(
+                                        details=OptionalEntityBaseDetails(
                                             is_validated=False,
                                             entity_type="entity_type_example",
                                         ),
@@ -2941,8 +4933,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                         hobbies_and_interests=[
                             Text(
                                 details=BaseDetails(
-                                    is_validated=False,
-                                    entity_type="entity_type_example",
                                     text_positions=[
                                         TextPosition(
                                             start=1,
@@ -2950,6 +4940,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                         ),
                                     ],
                                     raw_value="raw_value_example",
+                                    raw_values=[
+                                        TextDetails(
+                                            text_positions=[
+                                                TextPosition(
+                                                    start=1,
+                                                    end=1,
+                                                ),
+                                            ],
+                                            raw_value="raw_value_example",
+                                        ),
+                                    ],
+                                    is_validated=False,
+                                    entity_type="entity_type_example",
                                 ),
                                 value="value_example",
                             ),
@@ -2958,8 +4961,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             License(
                                 license_type=LicenseType(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2967,13 +4968,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 license_type_code=DrivingLicenseTypeCode(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2981,13 +4993,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 first_issued_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -2995,13 +5018,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 expiry_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3009,6 +5043,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -3018,8 +5065,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Event(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3027,13 +5072,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3041,13 +5097,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3055,6 +5122,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -3066,8 +5146,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3075,14 +5153,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 location=ResumeLocationsLocation(
                                     city=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3090,13 +5179,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     country=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3104,6 +5204,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3118,8 +5231,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     country_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3127,13 +5238,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     postal_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3141,13 +5263,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     street_address=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3155,13 +5288,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     county=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3169,13 +5313,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     region=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3183,6 +5338,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3190,8 +5358,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3199,13 +5365,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3213,6 +5390,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3223,8 +5413,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Event(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3232,13 +5420,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3246,13 +5445,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3260,6 +5470,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -3271,8 +5494,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3280,14 +5501,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 location=ResumeLocationsLocation(
                                     city=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3295,13 +5527,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     country=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3309,6 +5552,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3323,8 +5579,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     country_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3332,13 +5586,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     postal_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3346,13 +5611,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     street_address=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3360,13 +5636,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     county=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3374,13 +5661,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     region=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3388,6 +5686,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3395,8 +5706,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3404,13 +5713,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3418,6 +5738,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3428,8 +5761,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             MilitaryService(
                                 military_branch=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3437,13 +5768,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 military_division=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3451,13 +5793,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 starting_rank=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3465,13 +5818,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 current_or_ending_rank=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3479,14 +5843,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 location=ResumeLocationsLocation(
                                     city=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3494,13 +5869,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     country=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3508,6 +5894,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3522,8 +5921,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                                     ),
                                     country_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3531,13 +5928,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     postal_code=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3545,13 +5953,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     street_address=Text(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3559,13 +5978,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     county=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3573,13 +6003,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     region=BaseModelsName(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3587,14 +6028,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                 ),
                                 start_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3602,13 +6054,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 end_date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3616,6 +6079,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
@@ -3631,8 +6107,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                             Other(
                                 title=Title(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3640,13 +6114,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 date=Date(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3654,13 +6139,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value=dateutil_parser('1970-01-01').date(),
                                 ),
                                 description=Description(
                                     details=BaseDetails(
-                                        is_validated=False,
-                                        entity_type="entity_type_example",
                                         text_positions=[
                                             TextPosition(
                                                 start=1,
@@ -3668,14 +6164,25 @@ with inda_hr.ApiClient(configuration) as api_client:
                                             ),
                                         ],
                                         raw_value="raw_value_example",
+                                        raw_values=[
+                                            TextDetails(
+                                                text_positions=[
+                                                    TextPosition(
+                                                        start=1,
+                                                        end=1,
+                                                    ),
+                                                ],
+                                                raw_value="raw_value_example",
+                                            ),
+                                        ],
+                                        is_validated=False,
+                                        entity_type="entity_type_example",
                                     ),
                                     value="value_example",
                                 ),
                                 link=ResumeLinkLink(
                                     url=ResumeLinkURL(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3683,13 +6190,24 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
                                     label=ResumeLinkLinkLabel(
                                         details=BaseDetails(
-                                            is_validated=False,
-                                            entity_type="entity_type_example",
                                             text_positions=[
                                                 TextPosition(
                                                     start=1,
@@ -3697,6 +6215,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                                                 ),
                                             ],
                                             raw_value="raw_value_example",
+                                            raw_values=[
+                                                TextDetails(
+                                                    text_positions=[
+                                                        TextPosition(
+                                                            start=1,
+                                                            end=1,
+                                                        ),
+                                                    ],
+                                                    raw_value="raw_value_example",
+                                                ),
+                                            ],
+                                            is_validated=False,
+                                            entity_type="entity_type_example",
                                         ),
                                         value="value_example",
                                     ),
@@ -3704,8 +6235,8 @@ with inda_hr.ApiClient(configuration) as api_client:
                             ),
                         ],
                     ),
-                    metadata=ResumeRequestsMetadata(
-                        language="pt",
+                    metadata=Metadata(
+                        language="fr",
                     ),
                     attachments=DocsImportAttachments(
                         pic=Image(
@@ -3713,10 +6244,13 @@ with inda_hr.ApiClient(configuration) as api_client:
                             filename="filename_example",
                             file=open('/path/to/file', 'rb'),
                         ),
+                        cv=OptionalResumeAttachmentLanguage(
+                            language="fr",
+                        ),
                     ),
                 ),
                 url="url_example",
-                internal_id=None,
+                internal_id=Internalid(None),
             ),
         ],
         credentials=AwsCredentials(
@@ -3728,7 +6262,7 @@ with inda_hr.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Aws Import
+        # AWS Import
         api_response = api_instance.aws_import_post(indexname, docs_import_item_request)
         pprint(api_response)
     except inda_hr.ApiException as e:

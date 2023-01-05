@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**objective** | [**JobadSectionsValueModelStrictStr**](JobadSectionsValueModelStrictStr.md) |  | [optional] 
-**professional_summary** | [**JobadSectionsValueModelStrictStr**](JobadSectionsValueModelStrictStr.md) |  | [optional] 
+**objective** | [**BaseBenefitsValueModelStrictStr**](BaseBenefitsValueModelStrictStr.md) |  | [optional] 
+**professional_summary** | [**BaseBenefitsValueModelStrictStr**](BaseBenefitsValueModelStrictStr.md) |  | [optional] 
 **desired_employment** | [**ResumeEmployment**](ResumeEmployment.md) |  | [optional] 
 **desired_contracts** | [**[OptionalResumeContract]**](OptionalResumeContract.md) | A candidate preference towards certain contracts. | [optional] 
 **desired_salary** | [**OptionalResumeSalary**](OptionalResumeSalary.md) |  | [optional] 

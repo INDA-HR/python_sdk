@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**job_title** | [**MatchEvidenceTerms**](MatchEvidenceTerms.md) |  | 
 **id** | **str** |  | 
-**skills** | [**OptionalRequiredAndPreferredMatchEvidenceTerms**](OptionalRequiredAndPreferredMatchEvidenceTerms.md) |  | [optional] 
-**experience** | [**MatchEvidenceExperience**](MatchEvidenceExperience.md) |  | [optional] 
-**education** | [**MatchEvidenceEducation**](MatchEvidenceEducation.md) |  | [optional] 
+**education** | [**MatchResumeEvidenceEducation**](MatchResumeEvidenceEducation.md) |  | 
+**experience** | [**MatchResumeEvidenceExperience**](MatchResumeEvidenceExperience.md) |  | 
+**skills** | [**[MatchResumeEvidenceSkill]**](MatchResumeEvidenceSkill.md) |  | 
+**job_titles** | [**[MatchResumeEvidenceJobTitle]**](MatchResumeEvidenceJobTitle.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

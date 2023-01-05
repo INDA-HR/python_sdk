@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Get University
 
- This method retrieves the *university'* full data through a UUID *university_id*.  
+This method retrieves the *university'* full data through a UUID *university_id*.
 
 ### Example
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 University Autocomplete
 
- This method performs an autocomplete search based on the best matching *universities'* official name, alternative name  and acronym. It returns a minimal set of data for each *university* and its *ID*, which it is meant to be used as  *university_id* to retrieve the full data through the [Get University](https://api.inda.ai/hr/docs/v2/#operation/get_university__GET) method.  You can personalize both the autocomplete algorithm used to retrieve the list *universities* and the location search  filters. The latter allows to perform searches on both the *university'* headquarter and branches geo location. At least one of the two should match the user geo location query in order to show the *university* into the result  response. 
+This method performs an autocomplete search based on the best matching *universities'* official name, alternative name  and acronym. It returns a minimal set of data for each *university* and its *ID*, which it is meant to be used as  *university_id* to retrieve the full data through the [Get University](https://api.inda.ai/hr/docs/v2/#operation/get_university__GET) method.  You can personalize both the autocomplete algorithm used to retrieve the list *universities* and the location search  filters. The latter allows to perform searches on both the *university'* headquarter and branches geo location. At least one of the two should match the user geo location query in order to show the *university* into the result  response.
 
 ### Example
 

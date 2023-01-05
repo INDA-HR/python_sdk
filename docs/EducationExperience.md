@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **location** | [**ResumeLocationsLocation**](ResumeLocationsLocation.md) |  | [optional] 
 **organization** | [**Organization**](Organization.md) |  | [optional] 
 **courses** | [**[Text]**](Text.md) | List of attended courses. | [optional] 
+**id** | **str** | Unique identifier for the current experience. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

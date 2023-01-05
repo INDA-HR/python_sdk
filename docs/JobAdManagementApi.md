@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Add JobAd
 
- This method adds a job advertisement to *indexname* and assigns it a *JobAdID* (namely, a Unique Universal ID or UUID4). This method requires an application/json as content type body.  On the right, we provide an example of input structure; further details are available in dedicated sections.  Note that it is mandatory for users to have previously added information about the employer through the  [Add Company](https://api.inda.ai/hr/docs/v2/#operation/add_company__POST) method; the returned *ID* is the required *EmployerID* of job advertisement data. Obviously, one may skip this step if employer company data already exists.  Furthermore, also *Skills* is a required field, since it is necessary to perform the  [Match Resume](https://api.inda.ai/hr/docs/v2/#operation/match_resumes__POST).  Users may leverage the [Extract Skills from JobAd](https://api.inda.ai/hr/docs/v2/#operation/extract_skills_from_jobad__POST) method and allow INDA to automatically extract skills by analyzing the job advertisement data. It is **highly recommended** to validate the retrieved skills before injecting them to *Add JobAd* requests.   
+ This method adds a job advertisement to *indexname* and assigns it a *JobAdID* (namely, a Unique Universal ID or UUID4). This method requires an application/json as content type body.  On the right, we provide an example of input structure; further details are available in dedicated sections.  Note that it is mandatory for users to have previously added information about the employer through the  [Add Company](https://api.inda.ai/hr/docs/v2/#operation/add_company__POST) method; the returned *ID* is the required *EmployerID* of job advertisement data. Obviously, one may skip this step if employer company data already exists.  Furthermore, also *Skills* is a required field, since it is necessary to perform the  [Match Resume](https://api.inda.ai/hr/docs/v2/#operation/match_resumes__POST).  Users may leverage the [Extract Skills from JobAd](https://api.inda.ai/hr/docs/v2/#operation/extract_skills_from_jobad__POST) method and allow INDA to automatically extract skills by analyzing the job advertisement data. It is **highly recommended** to validate the retrieved skills before injecting them to *Add JobAd* requests.  Entities among skills, job titles and languages are automatically mapped by INDAto the adopted knowledge base, so that users can leverage on standardized values.Original values and entity IDs are available in *Details.RawValues* and *Details.Code*, respectively.  
 
 ### Example
 
@@ -56,58 +56,81 @@ with inda_hr.ApiClient(configuration) as api_client:
         data=JobadCommonData(
             job_title=JobTitleHeader(
                 details=JobTitleHeaderDetails(
-                    language="pt",
-                    weight=0.8,
+                    text_positions=[
+                        TextPosition(
+                            start=1,
+                            end=1,
+                        ),
+                    ],
+                    raw_value="raw_value_example",
+                    raw_values=[
+                        TextDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                        ),
+                    ],
+                    is_validated=False,
+                    entity_type="entity_type_example",
+                    proficiency_level="proficiency_level_example",
                     category="category_example",
+                    code=JobAdJobTitleCode(
+                        key="key_example",
+                    ),
+                    weight=0.8,
                 ),
                 value="value_example",
             ),
             job_description=JobDescription(
                 company_description=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
                 position_description=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
                 position_requirements=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
                 additional_information=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
@@ -175,10 +198,10 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             job_locations=[
                 BaseLocationsLocation(
-                    city=BaseEmploymentsValueModelStrictStr(
+                    city=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    country=BaseEmploymentsValueModelStrictStr(
+                    country=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                     geo_coordinates=ValueModelGeoLocation(
@@ -187,19 +210,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                             lon=-180.0,
                         ),
                     ),
-                    country_code=BaseEmploymentsValueModelStrictStr(
+                    country_code=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    postal_code=BaseEmploymentsValueModelStrictStr(
+                    postal_code=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    street_address=BaseEmploymentsValueModelStrictStr(
+                    street_address=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    county=BaseEmploymentsValueModelStrictStr(
+                    county=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    region=BaseEmploymentsValueModelStrictStr(
+                    region=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
@@ -210,7 +233,9 @@ with inda_hr.ApiClient(configuration) as api_client:
                     is_mandatory=True,
                     is_all_expenses_paid=True,
                 ),
-                relocation_date=None,
+                relocation_date=RangeDatetime(
+                    range=Range1(None),
+                ),
             ),
             remote_working=JobAdRemoteWorking(
                 type=JobAdRemoteWorkingType(
@@ -220,12 +245,16 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                     value="value_example",
                 ),
-                frequency=None,
+                frequency=Frequency1(None),
             ),
             experience=Experience(
-                duration=OptionalRequiredAndPreferredUnionDurationValueDurationRange(
-                    required=None,
-                    preferred=None,
+                duration=OptionalRequiredAndPreferredDurationRange(
+                    required=DurationRange(
+                        range=Range2(None),
+                    ),
+                    preferred=DurationRange(
+                        range=Range2(None),
+                    ),
                 ),
                 seniority=OptionalRequiredAndPreferredSeniorityValue(
                     required=SeniorityValue(
@@ -247,7 +276,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                         ),
                     ),
                     fields=[
-                        BaseEmploymentsValueModelStrictStr(
+                        BaseBenefitsValueModelStrictStr(
                             value="value_example",
                         ),
                     ],
@@ -262,18 +291,42 @@ with inda_hr.ApiClient(configuration) as api_client:
                         ),
                     ),
                     fields=[
-                        BaseEmploymentsValueModelStrictStr(
+                        BaseBenefitsValueModelStrictStr(
                             value="value_example",
                         ),
                     ],
                 ),
             ),
-            skills=None,
-            languages=OptionalRequiredAndPreferredListJobAdLanguage(
+            skills=Skills(None),
+            languages=OptionalRequiredAndPreferredConListLanguages(
                 required=[
-                    JobAdLanguage(
-                        details=JobAdLanguageDetails(
+                    OptionalJobAdLanguage(
+                        details=OptionalJobAdLanguageDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                            raw_values=[
+                                TextDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                ),
+                            ],
+                            is_validated=False,
+                            entity_type="entity_type_example",
                             proficiency_level="proficiency_level_example",
+                            category="category_example",
+                            code=JobAdLanguageCode(
+                                key="key_example",
+                            ),
                             language_code="language_code_example",
                             proficiency_level_code=ProficiencyLevelCode(
                                 cefr=CEFRLevels(
@@ -291,9 +344,33 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ],
                 preferred=[
-                    JobAdLanguage(
-                        details=JobAdLanguageDetails(
+                    OptionalJobAdLanguage(
+                        details=OptionalJobAdLanguageDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                            raw_values=[
+                                TextDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                ),
+                            ],
+                            is_validated=False,
+                            entity_type="entity_type_example",
                             proficiency_level="proficiency_level_example",
+                            category="category_example",
+                            code=JobAdLanguageCode(
+                                key="key_example",
+                            ),
                             language_code="language_code_example",
                             proficiency_level_code=ProficiencyLevelCode(
                                 cefr=CEFRLevels(
@@ -314,17 +391,41 @@ with inda_hr.ApiClient(configuration) as api_client:
             related_job_titles=[
                 OptionalJobAdJobTitle(
                     details=OptionalJobAdJobTitleDetails(
+                        text_positions=[
+                            TextPosition(
+                                start=1,
+                                end=1,
+                            ),
+                        ],
+                        raw_value="raw_value_example",
+                        raw_values=[
+                            TextDetails(
+                                text_positions=[
+                                    TextPosition(
+                                        start=1,
+                                        end=1,
+                                    ),
+                                ],
+                                raw_value="raw_value_example",
+                            ),
+                        ],
+                        is_validated=False,
+                        entity_type="entity_type_example",
+                        proficiency_level="proficiency_level_example",
                         category="category_example",
+                        code=JobAdJobTitleCode(
+                            key="key_example",
+                        ),
                         weight=0.75,
                     ),
                     value="value_example",
                 ),
             ],
             employment=JobTitleEmployment(
-                code=BaseEmploymentsValueModelStrictStr(
+                code=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
-                category=BaseEmploymentsValueModelStrictStr(
+                category=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
                 type=EmploymentType(
@@ -336,7 +437,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ],
                 functional_areas=[
-                    BaseEmploymentsValueModelStrictStr(
+                    BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ],
@@ -364,10 +465,10 @@ with inda_hr.ApiClient(configuration) as api_client:
                 ),
             ),
             publisher=Publisher(
-                name=BaseEmploymentsValueModelStrictStr(
+                name=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
-                category=BaseEmploymentsValueModelStrictStr(
+                category=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
                 link=JobadLinkLink(
@@ -387,7 +488,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                 type=JobShiftType(
                     value="DAY_SHIFT",
                 ),
-                frequency=None,
+                frequency=Frequency2(None),
             ),
             number_of_openings=ValueModelInt(
                 value=1,
@@ -411,6 +512,9 @@ with inda_hr.ApiClient(configuration) as api_client:
                 ),
             ],
             salary=JobAdSalary(
+                amount=RangeFloat(
+                    range=Range(None),
+                ),
                 currency=Currency(
                     value="value_example",
                 ),
@@ -420,7 +524,6 @@ with inda_hr.ApiClient(configuration) as api_client:
                 type=BaseSalariesType(
                     value="GROSS",
                 ),
-                amount=None,
             ),
             benefits=[
                 JobAdBenefit(
@@ -430,11 +533,16 @@ with inda_hr.ApiClient(configuration) as api_client:
             expiration_date=ValueModelDatetime(
                 value=dateutil_parser('1970-01-01T00:00:00.00Z'),
             ),
+            status=JobadCommonValueModelStr(
+                value="value_example",
+            ),
         ),
-        metadata=JobadRequestsMetadata(
-            language="it",
+        metadata=RequestMetadata(
+            language="pt",
         ),
     ) # JobAdRequest | 
+    src_lang = "pt" # str | Job Description language. If left empty each section's language will detected automatically. (optional)
+    dst_lang = "pt" # str | Extracted entities destination language. If left empty is assumed to be equal to the Job Description language. (optional)
     jobad_id = "jobad_id_example" # str |  (optional)
 
     # example passing only required values which don't have defaults set
@@ -449,7 +557,7 @@ with inda_hr.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Add JobAd
-        api_response = api_instance.add_jobad_post(indexname, job_ad_request, jobad_id=jobad_id)
+        api_response = api_instance.add_jobad_post(indexname, job_ad_request, src_lang=src_lang, dst_lang=dst_lang, jobad_id=jobad_id)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling JobAdManagementApi->add_jobad_post: %s\n" % e)
@@ -462,6 +570,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **indexname** | **str**|  |
  **job_ad_request** | [**JobAdRequest**](JobAdRequest.md)|  |
+ **src_lang** | **str**| Job Description language. If left empty each section&#39;s language will detected automatically. | [optional]
+ **dst_lang** | **str**| Extracted entities destination language. If left empty is assumed to be equal to the Job Description language. | [optional]
  **jobad_id** | **str**|  | [optional]
 
 ### Return type
@@ -765,7 +875,7 @@ Name | Type | Description  | Notes
 
 Patch JobAd
 
- This method updates the information related to the job advertisement stored with id *job_ad_id*.  This method accepts an application/json body with the same structure as [Add JobAd](https://api.inda.ai/hr/docs/v2/#operation/add_jobad__POST), however in this case all fields are optional.  Fields that contain differences between the corresponding original ones are substituted, while new fields are added. Bear in mind that lists are considered as singular value, therefore to modify an entry in a list it is necessary to insert the full list.  
+ This method updates the information related to the job advertisement stored with id *job_ad_id*.  This method accepts an application/json body with the same structure as [Add JobAd](https://api.inda.ai/hr/docs/v2/#operation/add_jobad__POST), however in this case all fields are optional.  Fields that contain differences between the corresponding original ones are substituted, while new fields are added. Bear in mind that lists are considered as singular value, therefore to modify an entry in a list it is necessary to insert the full list.  Entities among skills, job titles and languages are automatically mapped by INDAto the adopted knowledge base, so that users can leverage on standardized values.Original values and entity IDs are available in *Details.RawValues* and *Details.Code*, respectively.  
 
 ### Example
 
@@ -806,58 +916,81 @@ with inda_hr.ApiClient(configuration) as api_client:
         data=JobadCommonOptionalData(
             job_title=JobTitleHeader(
                 details=JobTitleHeaderDetails(
-                    language="pt",
-                    weight=0.8,
+                    text_positions=[
+                        TextPosition(
+                            start=1,
+                            end=1,
+                        ),
+                    ],
+                    raw_value="raw_value_example",
+                    raw_values=[
+                        TextDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                        ),
+                    ],
+                    is_validated=False,
+                    entity_type="entity_type_example",
+                    proficiency_level="proficiency_level_example",
                     category="category_example",
+                    code=JobAdJobTitleCode(
+                        key="key_example",
+                    ),
+                    weight=0.8,
                 ),
                 value="value_example",
             ),
-            job_description=OptionalJobDescription(
+            job_description=JobDescription(
                 company_description=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
-                position_description=OptionalSection(
+                position_description=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=JobadSectionsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=JobadSectionsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
                 position_requirements=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
                 additional_information=Section(
                     details=SectionDetails(
-                        language="pt",
+                        language="de",
                         weight=0.8,
                     ),
-                    title=BaseEmploymentsValueModelStrictStr(
+                    title=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    content=BaseEmploymentsValueModelStrictStr(
+                    content=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
@@ -925,10 +1058,10 @@ with inda_hr.ApiClient(configuration) as api_client:
             ],
             job_locations=[
                 BaseLocationsLocation(
-                    city=BaseEmploymentsValueModelStrictStr(
+                    city=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    country=BaseEmploymentsValueModelStrictStr(
+                    country=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                     geo_coordinates=ValueModelGeoLocation(
@@ -937,19 +1070,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                             lon=-180.0,
                         ),
                     ),
-                    country_code=BaseEmploymentsValueModelStrictStr(
+                    country_code=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    postal_code=BaseEmploymentsValueModelStrictStr(
+                    postal_code=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    street_address=BaseEmploymentsValueModelStrictStr(
+                    street_address=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    county=BaseEmploymentsValueModelStrictStr(
+                    county=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
-                    region=BaseEmploymentsValueModelStrictStr(
+                    region=BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ),
@@ -960,7 +1093,9 @@ with inda_hr.ApiClient(configuration) as api_client:
                     is_mandatory=True,
                     is_all_expenses_paid=True,
                 ),
-                relocation_date=None,
+                relocation_date=RangeDatetime(
+                    range=Range1(None),
+                ),
             ),
             remote_working=JobAdRemoteWorking(
                 type=JobAdRemoteWorkingType(
@@ -970,12 +1105,16 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                     value="value_example",
                 ),
-                frequency=None,
+                frequency=Frequency1(None),
             ),
             experience=Experience(
-                duration=OptionalRequiredAndPreferredUnionDurationValueDurationRange(
-                    required=None,
-                    preferred=None,
+                duration=OptionalRequiredAndPreferredDurationRange(
+                    required=DurationRange(
+                        range=Range2(None),
+                    ),
+                    preferred=DurationRange(
+                        range=Range2(None),
+                    ),
                 ),
                 seniority=OptionalRequiredAndPreferredSeniorityValue(
                     required=SeniorityValue(
@@ -997,7 +1136,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                         ),
                     ),
                     fields=[
-                        BaseEmploymentsValueModelStrictStr(
+                        BaseBenefitsValueModelStrictStr(
                             value="value_example",
                         ),
                     ],
@@ -1012,39 +1151,42 @@ with inda_hr.ApiClient(configuration) as api_client:
                         ),
                     ),
                     fields=[
-                        BaseEmploymentsValueModelStrictStr(
+                        BaseBenefitsValueModelStrictStr(
                             value="value_example",
                         ),
                     ],
                 ),
             ),
-            skills=OptionalRequiredAndPreferredConstrainedListValue(
+            skills=Skills(None),
+            languages=OptionalRequiredAndPreferredConListLanguages(
                 required=[
-                    OptionalJobAdSkill(
-                        details=OptionalJobAdSkillDetails(
+                    OptionalJobAdLanguage(
+                        details=OptionalJobAdLanguageDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                            raw_values=[
+                                TextDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                ),
+                            ],
+                            is_validated=False,
+                            entity_type="entity_type_example",
                             proficiency_level="proficiency_level_example",
-                            category="hard",
-                            weight=0.75,
-                        ),
-                        value="value_example",
-                    ),
-                ],
-                preferred=[
-                    OptionalJobAdSkill(
-                        details=OptionalJobAdSkillDetails(
-                            proficiency_level="proficiency_level_example",
-                            category="hard",
-                            weight=0.75,
-                        ),
-                        value="value_example",
-                    ),
-                ],
-            ),
-            languages=OptionalRequiredAndPreferredListJobAdLanguage(
-                required=[
-                    JobAdLanguage(
-                        details=JobAdLanguageDetails(
-                            proficiency_level="proficiency_level_example",
+                            category="category_example",
+                            code=JobAdLanguageCode(
+                                key="key_example",
+                            ),
                             language_code="language_code_example",
                             proficiency_level_code=ProficiencyLevelCode(
                                 cefr=CEFRLevels(
@@ -1062,9 +1204,33 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ],
                 preferred=[
-                    JobAdLanguage(
-                        details=JobAdLanguageDetails(
+                    OptionalJobAdLanguage(
+                        details=OptionalJobAdLanguageDetails(
+                            text_positions=[
+                                TextPosition(
+                                    start=1,
+                                    end=1,
+                                ),
+                            ],
+                            raw_value="raw_value_example",
+                            raw_values=[
+                                TextDetails(
+                                    text_positions=[
+                                        TextPosition(
+                                            start=1,
+                                            end=1,
+                                        ),
+                                    ],
+                                    raw_value="raw_value_example",
+                                ),
+                            ],
+                            is_validated=False,
+                            entity_type="entity_type_example",
                             proficiency_level="proficiency_level_example",
+                            category="category_example",
+                            code=JobAdLanguageCode(
+                                key="key_example",
+                            ),
                             language_code="language_code_example",
                             proficiency_level_code=ProficiencyLevelCode(
                                 cefr=CEFRLevels(
@@ -1085,17 +1251,41 @@ with inda_hr.ApiClient(configuration) as api_client:
             related_job_titles=[
                 OptionalJobAdJobTitle(
                     details=OptionalJobAdJobTitleDetails(
+                        text_positions=[
+                            TextPosition(
+                                start=1,
+                                end=1,
+                            ),
+                        ],
+                        raw_value="raw_value_example",
+                        raw_values=[
+                            TextDetails(
+                                text_positions=[
+                                    TextPosition(
+                                        start=1,
+                                        end=1,
+                                    ),
+                                ],
+                                raw_value="raw_value_example",
+                            ),
+                        ],
+                        is_validated=False,
+                        entity_type="entity_type_example",
+                        proficiency_level="proficiency_level_example",
                         category="category_example",
+                        code=JobAdJobTitleCode(
+                            key="key_example",
+                        ),
                         weight=0.75,
                     ),
                     value="value_example",
                 ),
             ],
             employment=JobTitleEmployment(
-                code=BaseEmploymentsValueModelStrictStr(
+                code=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
-                category=BaseEmploymentsValueModelStrictStr(
+                category=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
                 type=EmploymentType(
@@ -1107,7 +1297,7 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ],
                 functional_areas=[
-                    BaseEmploymentsValueModelStrictStr(
+                    BaseBenefitsValueModelStrictStr(
                         value="value_example",
                     ),
                 ],
@@ -1120,8 +1310,10 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ],
             ),
-            contract=OptionalJobAdContract(
-                type="type_example",
+            contract=JobAdContract(
+                type=ContractType(
+                    value="value_example",
+                ),
                 duration=ValueModelInt(
                     value=1,
                 ),
@@ -1132,14 +1324,14 @@ with inda_hr.ApiClient(configuration) as api_client:
                     value=dateutil_parser('1970-01-01T00:00:00.00Z'),
                 ),
             ),
-            publisher=OptionalPublisher(
-                name=JobadSectionsValueModelStrictStr(
+            publisher=Publisher(
+                name=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
-                category=JobadSectionsValueModelStrictStr(
+                category=BaseBenefitsValueModelStrictStr(
                     value="value_example",
                 ),
-                link=OptionalLink(
+                link=JobadLinkLink(
                     url=JobadLinkURL(
                         value="value_example",
                     ),
@@ -1156,12 +1348,12 @@ with inda_hr.ApiClient(configuration) as api_client:
                 type=JobShiftType(
                     value="DAY_SHIFT",
                 ),
-                frequency=None,
+                frequency=Frequency2(None),
             ),
             number_of_openings=ValueModelInt(
                 value=1,
             ),
-            link=OptionalLink(
+            link=JobadLinkLink(
                 url=JobadLinkURL(
                     value="value_example",
                 ),
@@ -1179,17 +1371,19 @@ with inda_hr.ApiClient(configuration) as api_client:
                     ),
                 ),
             ],
-            salary=OptionalJobAdSalary(
+            salary=JobAdSalary(
+                amount=RangeFloat(
+                    range=Range(None),
+                ),
                 currency=Currency(
                     value="value_example",
                 ),
-                frequency=OptionalFrequency(
-                    value="value_example",
+                frequency=Frequency(
+                    value="YEARLY",
                 ),
-                type=OptionalType(
-                    value="value_example",
+                type=BaseSalariesType(
+                    value="GROSS",
                 ),
-                amount=None,
             ),
             benefits=[
                 JobAdBenefit(
@@ -1199,16 +1393,29 @@ with inda_hr.ApiClient(configuration) as api_client:
             expiration_date=ValueModelDatetime(
                 value=dateutil_parser('1970-01-01T00:00:00.00Z'),
             ),
+            status=JobadCommonValueModelStr(
+                value="value_example",
+            ),
         ),
-        metadata=OptionalMetadata(
-            language="es",
+        metadata=RequestMetadata(
+            language="pt",
         ),
     ) # PatchJobAdRequest | 
+    src_lang = "pt" # str | Job Description language. If left empty each section's language will detected automatically. (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Patch JobAd
         api_response = api_instance.patch_jobad_patch(indexname, jobad_id, patch_job_ad_request)
+        pprint(api_response)
+    except inda_hr.ApiException as e:
+        print("Exception when calling JobAdManagementApi->patch_jobad_patch: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Patch JobAd
+        api_response = api_instance.patch_jobad_patch(indexname, jobad_id, patch_job_ad_request, src_lang=src_lang)
         pprint(api_response)
     except inda_hr.ApiException as e:
         print("Exception when calling JobAdManagementApi->patch_jobad_patch: %s\n" % e)
@@ -1222,6 +1429,7 @@ Name | Type | Description  | Notes
  **indexname** | **str**|  |
  **jobad_id** | **str**|  |
  **patch_job_ad_request** | [**PatchJobAdRequest**](PatchJobAdRequest.md)|  |
+ **src_lang** | **str**| Job Description language. If left empty each section&#39;s language will detected automatically. | [optional]
 
 ### Return type
 
