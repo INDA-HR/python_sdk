@@ -33,6 +33,7 @@ Add Application
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.base_application_request import BaseApplicationRequest
 from inda_hr.model.application_id_response import ApplicationIDResponse
@@ -278,6 +279,7 @@ Add Application Stage
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.application_status_request import ApplicationStatusRequest
 from inda_hr.model.application_id_response import ApplicationIDResponse
@@ -371,6 +373,7 @@ Application Status
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.http_validation_error import HTTPValidationError
 from inda_hr.model.application_responses_status import ApplicationResponsesStatus
@@ -456,6 +459,7 @@ Apply
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.apply_item_request import ApplyItemRequest
 from inda_hr.model.application_id_response import ApplicationIDResponse
 from inda_hr.model.http_validation_error import HTTPValidationError
@@ -6902,6 +6906,7 @@ Delete Applicants
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.delete_candidates_response import DeleteCandidatesResponse
 from inda_hr.model.http_validation_error import HTTPValidationError
@@ -6986,6 +6991,7 @@ Delete Application
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.delete_application_response import DeleteApplicationResponse
 from inda_hr.model.http_validation_error import HTTPValidationError
@@ -7072,6 +7078,7 @@ Delete Application Stage
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.application_id_response import ApplicationIDResponse
 from inda_hr.model.http_validation_error import HTTPValidationError
@@ -7255,6 +7262,7 @@ Get Applicants
 import time
 import inda_hr
 from inda_hr.api import application_management_api
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.get_candidates_response import GetCandidatesResponse
 from inda_hr.model.http_validation_error import HTTPValidationError
@@ -7360,6 +7368,7 @@ import time
 import inda_hr
 from inda_hr.api import application_management_api
 from inda_hr.model.get_application_response import GetApplicationResponse
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.http_validation_error import HTTPValidationError
 from pprint import pprint
@@ -7550,6 +7559,7 @@ import time
 import inda_hr
 from inda_hr.api import application_management_api
 from inda_hr.model.patch_application_response import PatchApplicationResponse
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.patch_application_request import PatchApplicationRequest
 from inda_hr.model.http_validation_error import HTTPValidationError

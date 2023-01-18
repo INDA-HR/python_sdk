@@ -171,6 +171,7 @@ import time
 import inda_hr
 from inda_hr.api import resume_search_api
 from inda_hr.model.found_candidates_response import FoundCandidatesResponse
+from inda_hr.model.jobad_id import JobadId
 from inda_hr.model.error_model import ErrorModel
 from inda_hr.model.candidate_search_query import CandidateSearchQuery
 from inda_hr.model.http_validation_error import HTTPValidationError
