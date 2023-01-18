@@ -1,0 +1,9 @@
+from inda_hr.paths.hr_v2_index_indexname_jobad_jobad_id_applications_resume_resume_id_hiring_pipeline_stage_.post import ApiForpost
+from inda_hr.paths.hr_v2_index_indexname_jobad_jobad_id_applications_resume_resume_id_hiring_pipeline_stage_.delete import ApiFordelete
+
+
+class HrV2IndexIndexnameJobadJobadIdApplicationsResumeResumeIdHiringPipelineStage(
+    ApiForpost,
+    ApiFordelete,
+):
+    pass

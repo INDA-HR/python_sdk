@@ -1,10 +1,12 @@
+# coding: utf-8
+
 # flake8: noqa
 
 # import all models into this package
 # if you have many models here with many references from one model to another this may
 # raise a RecursionError
 # to avoid this, import only the models that you directly need like:
-# from from inda_hr.model.pet import Pet
+# from inda_hr.model.pet import Pet
 # or import this package, but before doing it, use:
 # import sys
 # sys.setrecursionlimit(n)
@@ -20,7 +22,6 @@ from inda_hr.model.application_id import ApplicationID
 from inda_hr.model.application_id_response import ApplicationIDResponse
 from inda_hr.model.application_responses_status import ApplicationResponsesStatus
 from inda_hr.model.application_status_request import ApplicationStatusRequest
-from inda_hr.model.applications_inner import ApplicationsInner
 from inda_hr.model.apply_item_request import ApplyItemRequest
 from inda_hr.model.asset import Asset
 from inda_hr.model.attachment import Attachment
@@ -153,8 +154,6 @@ from inda_hr.model.found_docs_response import FoundDocsResponse
 from inda_hr.model.found_job_ads_response import FoundJobAdsResponse
 from inda_hr.model.foundation_year import FoundationYear
 from inda_hr.model.frequency import Frequency
-from inda_hr.model.frequency1 import Frequency1
-from inda_hr.model.frequency2 import Frequency2
 from inda_hr.model.gender import Gender
 from inda_hr.model.geo_coordinates import GeoCoordinates
 from inda_hr.model.geo_location import GeoLocation
@@ -175,10 +174,8 @@ from inda_hr.model.headquarter import Headquarter
 from inda_hr.model.highest_education_title import HighestEducationTitle
 from inda_hr.model.hiring_details import HiringDetails
 from inda_hr.model.hiring_pipeline_stage import HiringPipelineStage
-from inda_hr.model.history import History
 from inda_hr.model.history_detail import HistoryDetail
 from inda_hr.model.id import ID
-from inda_hr.model.id import Id
 from inda_hr.model.id_entity_errors import IdEntityErrors
 from inda_hr.model.id_entity_input import IdEntityInput
 from inda_hr.model.id_entity_mapping import IdEntityMapping
@@ -195,7 +192,6 @@ from inda_hr.model.indexed_document_failure import IndexedDocumentFailure
 from inda_hr.model.indexed_document_failures_response import IndexedDocumentFailuresResponse
 from inda_hr.model.industries import Industries
 from inda_hr.model.industry_details import IndustryDetails
-from inda_hr.model.internalid import Internalid
 from inda_hr.model.isco_mapping import IscoMapping
 from inda_hr.model.istat_mapping import IstatMapping
 from inda_hr.model.item_id_response import ItemIdResponse
@@ -242,8 +238,6 @@ from inda_hr.model.jobad_education_education_level_code import JobadEducationEdu
 from inda_hr.model.jobad_email_address_address import JobadEmailAddressAddress
 from inda_hr.model.jobad_email_address_email_address import JobadEmailAddressEmailAddress
 from inda_hr.model.jobad_email_address_email_label import JobadEmailAddressEmailLabel
-from inda_hr.model.jobad_id import JobadId
-from inda_hr.model.jobad_id_any_of import JobadIdAnyOf
 from inda_hr.model.jobad_link_link import JobadLinkLink
 from inda_hr.model.jobad_link_link_label import JobadLinkLinkLabel
 from inda_hr.model.jobad_link_url import JobadLinkURL
@@ -253,7 +247,6 @@ from inda_hr.model.jobad_phone_numbers_number import JobadPhoneNumbersNumber
 from inda_hr.model.jobad_phone_numbers_phone_label import JobadPhoneNumbersPhoneLabel
 from inda_hr.model.jobad_phone_numbers_phone_number import JobadPhoneNumbersPhoneNumber
 from inda_hr.model.jobad_requests_simple_term import JobadRequestsSimpleTerm
-from inda_hr.model.jobadid import Jobadid
 from inda_hr.model.jobfunctions import Jobfunctions
 from inda_hr.model.jobtitle import Jobtitle
 from inda_hr.model.jobtitle_detail import JobtitleDetail
@@ -262,7 +255,6 @@ from inda_hr.model.keywords_out import KeywordsOut
 from inda_hr.model.keywords_response import KeywordsResponse
 from inda_hr.model.license import License
 from inda_hr.model.license_type import LicenseType
-from inda_hr.model.location_inner import LocationInner
 from inda_hr.model.login_data import LoginData
 from inda_hr.model.mapping_response import MappingResponse
 from inda_hr.model.marital_status import MaritalStatus
@@ -392,9 +384,6 @@ from inda_hr.model.publication import Publication
 from inda_hr.model.publisher import Publisher
 from inda_hr.model.query_filters import QueryFilters
 from inda_hr.model.query_term import QueryTerm
-from inda_hr.model.range import Range
-from inda_hr.model.range1 import Range1
-from inda_hr.model.range2 import Range2
 from inda_hr.model.range_datetime import RangeDatetime
 from inda_hr.model.range_float import RangeFloat
 from inda_hr.model.range_model_datetime import RangeModelDatetime
@@ -484,7 +473,6 @@ from inda_hr.model.skill_comparison import SkillComparison
 from inda_hr.model.skill_detail import SkillDetail
 from inda_hr.model.skill_details import SkillDetails
 from inda_hr.model.skill_hierarchy import SkillHierarchy
-from inda_hr.model.skills import Skills
 from inda_hr.model.skills_classification_request import SkillsClassificationRequest
 from inda_hr.model.skills_classification_response import SkillsClassificationResponse
 from inda_hr.model.skills_comparison_value import SkillsComparisonValue
@@ -532,8 +520,6 @@ from inda_hr.model.upskilling_request import UpskillingRequest
 from inda_hr.model.validated_float_value_model import ValidatedFloatValueModel
 from inda_hr.model.validated_integer_value_model import ValidatedIntegerValueModel
 from inda_hr.model.validation_error import ValidationError
-from inda_hr.model.value import Value
-from inda_hr.model.value1 import Value1
 from inda_hr.model.value_model_bytes import ValueModelBytes
 from inda_hr.model.value_model_constrained_int_value import ValueModelConstrainedIntValue
 from inda_hr.model.value_model_datetime import ValueModelDatetime
@@ -548,4 +534,3 @@ from inda_hr.model.work_activity_comparison import WorkActivityComparison
 from inda_hr.model.work_activity_comparison_request import WorkActivityComparisonRequest
 from inda_hr.model.work_activity_comparison_value import WorkActivityComparisonValue
 from inda_hr.model.work_experience import WorkExperience
-from inda_hr.model.yearoffirstaccreditation import Yearoffirstaccreditation

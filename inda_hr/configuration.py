@@ -1,3 +1,4 @@
+# coding: utf-8
 """
     INDA HR - INtelligent Data Analysis for HR
 
@@ -18,8 +19,19 @@ from http import client as http_client
 from inda_hr.exceptions import ApiValueError
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
-    'multipleOf', 'maximum', 'exclusiveMaximum', 'minimum', 'exclusiveMinimum',
-    'maxLength', 'minLength', 'pattern', 'maxItems', 'minItems'
+    'multipleOf',
+    'maximum',
+    'exclusiveMaximum',
+    'minimum',
+    'exclusiveMinimum',
+    'maxLength',
+    'minLength',
+    'pattern',
+    'maxItems',
+    'minItems',
+    'uniqueItems',
+    'maxProperties',
+    'minProperties',
 }
 
 
@@ -72,8 +84,6 @@ class Configuration(object):
     :param server_operation_variables: Mapping from operation ID to a mapping with
       string values to replace variables in templated server configuration.
       The validation of enums is performed for variables with defined enum values before.
-    :param ssl_ca_cert: str - the path to a file of concatenated CA certificates
-      in PEM format
 
     :Example:
     """
@@ -83,18 +93,12 @@ class Configuration(object):
     def __init__(
         self,
         host=None,
-        api_key=None,
-        api_key_prefix=None,
-        access_token=None,
-        username=None,
-        password=None,
         discard_unknown_keys=False,
         disabled_client_side_validations="",
         server_index=None,
         server_variables=None,
         server_operation_index=None,
         server_operation_variables=None,
-        ssl_ca_cert=None,
     ):
         """Constructor
         """
@@ -113,27 +117,6 @@ class Configuration(object):
         """Temp file folder for downloading files
         """
         # Authentication Settings
-        self.access_token = access_token
-        self.api_key = {}
-        if api_key:
-            self.api_key = api_key
-        """dict to store API key(s)
-        """
-        self.api_key_prefix = {}
-        if api_key_prefix:
-            self.api_key_prefix = api_key_prefix
-        """dict to store API prefix (e.g. Bearer)
-        """
-        self.refresh_api_key_hook = None
-        """function hook to refresh API key if expired
-        """
-        self.username = username
-        """Username for HTTP basic authentication
-        """
-        self.password = password
-        """Password for HTTP basic authentication
-        """
-        self.discard_unknown_keys = discard_unknown_keys
         self.disabled_client_side_validations = disabled_client_side_validations
         self.logger = {}
         """Logging Settings
@@ -161,7 +144,7 @@ class Configuration(object):
            Set this to false to skip verifying SSL certificate when calling API
            from https server.
         """
-        self.ssl_ca_cert = ssl_ca_cert
+        self.ssl_ca_cert = None
         """Set this to customize the certificate file to verify the peer.
         """
         self.cert_file = None
@@ -184,9 +167,6 @@ class Configuration(object):
 
         self.proxy = None
         """Proxy URL
-        """
-        self.no_proxy = None
-        """bypass proxy for host in the no_proxy list.
         """
         self.proxy_headers = None
         """Proxy headers
@@ -393,7 +373,7 @@ class Configuration(object):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2.32211\n"\
-               "SDK Package Version: 1.0.0".\
+               "SDK Package Version: 2.2.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
